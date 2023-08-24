@@ -65,6 +65,7 @@ body::-webkit-scrollbar-thumb{
 }
 .company_details {
   color: white;
+  width: 50%;
 }
 .logo {
   display: flex;
@@ -94,8 +95,17 @@ input {
   padding: 20px;
 }
 .for_center {
-  width: 50%;
+  /* width: 50%; */
   margin: auto;
+}
+.para_graph{
+  font-family: Roche Sans;
+font-size: 18px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: 0px;
+text-align: left;
+
 }
 .for_color {
   color: #26becf;
@@ -673,11 +683,65 @@ textarea{
   }
 }
 
+/* 24/8/24 */
 
 
+.sigin_virtual_heading{
+height: 90px;
+font-family: Roche Sans;
+font-size: 50px;
+font-style: italic;
+font-weight: 700;
+line-height: 63px;
+letter-spacing: 0px;
+text-align: left;
+}
 
+.accucheck_details_siginPage{
+  font-family: Roche Sans;
+font-size: 18px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: 0px;
+text-align: left;
 
-/*  */
+}
+.signin_page{
+}
+
+.accuCheck_sigin_Title{
+  font-size: 40px;
+    font-weight: 700;
+    line-height: 56px;
+    letter-spacing: 0.005em;
+
+}
+.Signinto{
+  font-size: 25px;
+    font-weight: 600;
+    color: #2A2A2A;
+}
+.forGot_Password{
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0.005em;
+  color: #CBCBCB;
+
+}
+.sigin_Fields{
+font-size: 18px;
+color: #CBCBCB !important; 
+}
+.sigin_Lables{
+font-size: 24px;
+line-height: 29px;
+letter-spacing: 0.005em;
+}
+input{
+  height: 45px !important;
+}
+/* 24/8/24 end */
 .member_cources_button{
   border-radius: 100px;
   background-color: #26BECF;
@@ -743,3 +807,6 @@ textarea{
 
 
 
+@media screen and (max-width: 360) {
+
+}

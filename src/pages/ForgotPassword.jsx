@@ -7,7 +7,7 @@ const ForgotPassword = () => {
      <div className='container-fluid forgot_page'>
      <div className='row'>
          <div className='company_name'>
-         <h3 className='brand_name'>ACCU-CHECK <span>®</span> </h3>
+         <h3 className='brand_name'>ACCU-CHEK <span>®</span> </h3>
          </div>
     </div>
     <div className='row justify-content-center'>
