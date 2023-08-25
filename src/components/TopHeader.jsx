@@ -35,8 +35,9 @@ const TopHeader = () => {
         <div className='col-md-6 d-flex justify-content-end'>
           <div className='row'>
             <div className='right_container d-flex align-items-baseline'id='doc_hid3'>
-              <div className='serch'>
-                <input type='search' className='form-control' />
+              <div className='serch position-relative'>
+              <input type="text" className="search-hover" name="" placeholder="search here..." />
+              <span> <i class="fa-solid fa-magnifying-glass"></i> </span>
               </div>
               <div className='notification'>
                 <img src='/notification-icon.svg' alt='' />

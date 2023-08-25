@@ -32,6 +32,7 @@ const Shop = () => {
      {isloading?(
       <Loader />
     ):( 
+      <div className='shop_parent_div'>
       <div className='position-absolute' style={{marginLeft:'20%',width:"80%"}}>
        <div className='container  shop_container for_common_Top_margin shop_remove_border shop_container_height' style={{width:'95%'}} >
          <div className='row'>
@@ -43,7 +44,7 @@ const Shop = () => {
             <div className='col-md-6'>
                 <div className='row justify-content-end'>
                    <dic className="col-4 ">
-                      <input type='serch' />
+                      <input type='serch ' id='shop_serch' />
                    </dic>
                 </div>
             </div>
@@ -130,6 +131,7 @@ const Shop = () => {
 })}
       </div>
     </div>
+      </div>
       </div>
       )}
     </>

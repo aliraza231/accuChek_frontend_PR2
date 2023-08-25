@@ -14,7 +14,7 @@ const MemberLayout = () => {
         <div className="row">
           <div className="">
             <h3 className="brand_name text-center mt-5 mb-5">
-              ACCU-CHECK <span>®</span>
+              ACCU-CHEK <span>®</span>
             </h3>
           </div>
         </div>
@@ -30,7 +30,7 @@ const MemberLayout = () => {
                   </svg>
                   </span>
                   <NavLink to="/user/MemberHome">
-                 <button className='btn for_side_bar_prop '>OverView</button>
+                 <button className='btn for_side_bar_prop  ' id='remove_active'>OverView</button>
                  </NavLink>
                 </div>
               </li>

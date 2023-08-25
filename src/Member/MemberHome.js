@@ -4,8 +4,8 @@ const MemberHome = () => {
     <>
        {/* Member Prodile  */}
         {/* <div className="c" id="admin_user"> */}
-        <div className='user_profile_root_crad position-absolute ps-2' style={{width:"80%",marginLeft:"20%"}}>
-        <div className="container for_common_Top_margin">
+        <div className='user_profile_root_crad position-absolute ps-2' style={{width:"78%",marginLeft:"20%"}}>
+        <div className="container for_common_Top_margin" id='doc_image_container'>
     <div className='row ms-1 doctor_profile'>
       <div className='doctor_image doc_parent_div d-flex'>
         <img src='/doctor-bigImage.png' width="138.67px" height="138.67px" alt='' />
@@ -81,7 +81,7 @@ const MemberHome = () => {
       {/* Member Acheviments */}
       <div className='container'>
         <div className='row ms-1 text-center'>
-          <div className="col-md-6 col-sm-8 mb-3 width me-3 for_achivements_background text-align-center for_padd">
+          <div className="col-md-6 col-sm-8 mb-3 width me-3 for_achivements_background text-align-center for_padd set_rows_wids" >
           {/* First Row */}
             <div className='row'>
               <div className='col-md-6 p-2'>
@@ -167,7 +167,7 @@ const MemberHome = () => {
           </div>
           </div>
           {/* Second Half Card Start Here */}
-          <div className="col-md-6 width for_achivements_background">
+          <div className="col-md-6 width for_achivements_background set_rows_wids">
           <div className='row p-2'>
               <div className='col-md-6 p-2'>
                 <h3 className='achivement'>Completed Cources</h3>
