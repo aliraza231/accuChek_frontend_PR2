@@ -30,7 +30,7 @@ const MemberLayout = () => {
                   </svg>
                   </span>
                   <NavLink to="/user/MemberHome">
-                 <button className='btn for_side_bar_prop '>OverView</button>
+                 <button className='btn for_side_bar_prop  ' id='remove_active'>OverView</button>
                  </NavLink>
                 </div>
               </li>
