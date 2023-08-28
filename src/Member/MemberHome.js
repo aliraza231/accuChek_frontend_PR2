@@ -1,5 +1,7 @@
 import React from 'react'
 const MemberHome = () => {
+  const storedUserName = localStorage.getItem('userName');
+   const storedUserId = localStorage.getItem('userId');
   return (
     <>
        {/* Member Prodile  */}
@@ -8,10 +10,10 @@ const MemberHome = () => {
         <div className="container for_common_Top_margin" id='doc_image_container'>
     <div className='row ms-1 doctor_profile'>
       <div className='doctor_image doc_parent_div d-flex'>
-        <img src='/doctor-bigImage.png' width="138.67px" height="138.67px" alt='' />
+        <img src='/doctor-bigImage.png' width="138.67px" height="138.67px" alt='' className='contol_width' />
         <div className='doc_child ms-5'>
           <div className='d-flex ms-1'>
-            <h6 className='doc_name'>Ahmed Ali </h6>
+            <h6 className='doc_name'>{storedUserName} </h6>
             <h6 className='doc_level doc_name'>Level 1</h6>
           </div>
 
@@ -37,7 +39,7 @@ const MemberHome = () => {
             <div className='col-md-3 mb-2'>
               <div className='member_card'>
               <div className='card_heading p-3 text-dark'>
-                <p className='total_points'>Total Ponits</p>
+                <p className='total_points'>Total Point</p>
               </div>
               <div className='card_heading text-center text-dark'>
                 <h1 className='total_hours'>230</h1>

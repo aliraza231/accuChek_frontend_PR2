@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
-import Loader from '../components/Loader'
+import Loader from '../../components/Loader'
 // import { getProductsApi } from "../../Configuration/Const";
 const GetMembers = () => {
   const [getMember, setMember] = useState([]);
@@ -54,7 +54,7 @@ const GetMembers = () => {
         
         Swal.fire(
           'Deleted!',
-          'Your Prodcut has been deleted.',
+          'User has been deleted.',
           'success'
         )
       }

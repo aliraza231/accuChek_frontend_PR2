@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactPlayer from 'react-player'
-import Loader from '../components/Loader'
+import Loader from '../../components/Loader'
+import Swal from "sweetalert2";
 // import {getCourcesApi} from "../../Configuration/Const"
 const GetCources = () => {
 // Fet All Cources from Database
@@ -22,7 +23,42 @@ const getData = async () => {
   console.log(result._id);
   setLoading(false)
 };
-
+const handleDelete = async (id) => {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      // Delete the product
+      await fetch(`http://128.199.221.11:5000/Admin/dellCource/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (response.ok) {
+            console.log("Cource deleted successfully");
+            // Call getData to fetch updated product list
+            getData();
+          } else {
+            console.error("Error deleting Cource");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      
+      Swal.fire(
+        'Deleted!',
+        'Your Cource has been deleted.',
+        'success'
+      )
+    }
+  });
+};
 let count2 = getProducts.length;
 
   const [videoCompleted, setvideoCompleted] = useState(false);
@@ -55,7 +91,7 @@ let count2 = getProducts.length;
               <div class="col-md-8">
                 <div class="search">
                   <i class="fa fa-search"></i>
-                  <input type="text" class="form-control" placeholder="Serch Vedios"/>
+                  <input type="text" class="form-control" placeholder="Serch Vedios" id='set_serch_height'/>
                   <button class="btn">Search</button>
                 </div>
               </div>
@@ -82,7 +118,7 @@ let count2 = getProducts.length;
               <img src={Cource.image} alt='' />
               <p>{Cource.image}</p>
               </div> */}
-              <div className='col-md-4'>
+              <div className='col-md-3'>
                 <div className="cource_details">
                     <h6>{Cource.name}</h6>
                     <p>{Cource.discription}</p>
@@ -91,6 +127,16 @@ let count2 = getProducts.length;
               </div>
               <div className='col-md-4 cource_ponits'>
                 <h6> <i class="fa-solid fa-award"></i> {Cource.points} </h6>
+              </div>
+              <div className='col-md-1'>
+              <div className='w-100 align-self-end'>
+                <button
+                onClick={() => {
+                      handleDelete(Cource._id);
+                      console.log(Cource._id);
+                    }} 
+                className='btn btn-danger '> <i className='fa-solid fa-trash'></i> </button>
+              </div>
               </div>
           </div>
             )
