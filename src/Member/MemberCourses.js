@@ -108,7 +108,7 @@ const [getProducts, setProducts] = useState([]);
                         <h3>Courses</h3>
                     </div>
                     <div className='col-sm-3 justify-content-end'>
-                        <input className='justify-content-end mt-4 ms-5' type='Date' placeholder='Date'></input>
+                        <input className='justify-content-end mt-4 ms-5' type='Date' placeholder='Date' id='cources_serch'></input>
                     </div>
                 </div>
 

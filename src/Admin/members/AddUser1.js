@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Joi from "joi-browser";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
+  const navigate=useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,8 +64,8 @@ const SideBar = () => {
     if(result.status=== 201){
       Swal.fire("success!", "User add Sucessfuly!", "success");
     
-    // navigate('/user')
-    window.alert("Successfull")
+      navigate('/Admin/Dashboard/GetMembers');
+    // window.alert("Successfull")
   }else{
     Swal.fire({
       position:"center",

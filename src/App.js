@@ -1,17 +1,18 @@
-import GetProducrs from "./Member/GetProducrs";
+import GetProducrs from "./Admin/products/GetProducrs";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// Admin related imports
 import Layout from "./components/Layout";
-import AddUser from "./Member/AddUser1";
-import AddProduct from "./Member/AddProduct";
-import AddCource from "./Member/AddCource";
-import GetCources from "./Member/GetCources";
-import GetMembers from "./Member/GetMembers";
+import AddUser from "./Admin/members/AddUser1";
+import AddProduct from "./Admin/products/AddProduct";
+import AddCource from "./Admin/cources/AddCource";
+import GetCources from "./Admin/cources/GetCources";
+import GetMembers from "./Admin/members/GetMembers";
 
 
 // Update routes
-import UpdateProduct from "./Member/UpdateProduct";
-import UpdateMember from "./Member/UpdateMember";
+import UpdateProduct from "./Admin/products/UpdateProduct";
+import UpdateMember from "./Admin/members/UpdateMember";
 // wnd update routes
 
 // User FroentEnd Pages

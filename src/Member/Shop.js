@@ -54,44 +54,44 @@ const Shop = () => {
     <div className='col-md-12'>
         <div className='d-flex justify-content-between'>
         <button
-          className={`btn common_button font_family_common btn_equal ${selectedCategory === 'All' ? 'active' : ''}`}
+          className={`btn common_button font_family_common btn_equal ${selectedCategory === 'All' ? 'activeShop' : ''}`}
           onClick={() => setSelectedCategory('All')}>
           All
         </button>
         {/* 2nd button */}
         <button
-          className={`btn common_button font_family_common btn_equal ${selectedCategory === 'Products' ? 'active' : ''}`}
+          className={`btn common_button font_family_common btn_equal ${selectedCategory === 'Products' ? 'activeShop' : ''}`}
           onClick={() => setSelectedCategory('Products')}>
           Products
         </button>
             {/*3rd Button  */}
             <button
-              className={`btn common_button font_family_common btn_equal ${selectedCategory === 'Food' ? 'active' : ''}`}
+              className={`btn common_button font_family_common btn_equal ${selectedCategory === 'Food' ? 'activeShop' : ''}`}
               onClick={() => setSelectedCategory('Food')}>
               Food
             </button>
             {/* 4th Button */}
             <button
-            className={`btn common_button font_family_common btn_equal ${selectedCategory === 'Gift' ? 'active' : ''}`}
+            className={`btn common_button font_family_common btn_equal ${selectedCategory === 'Gift' ? 'activeShop' : ''}`}
             onClick={() => setSelectedCategory('Gift')}>
             Gifts
           </button>
           {/* 5th Button */}
           {/*  */}
           <button
-            className={`btn common_button font_family_common btn_equal ${selectedCategory === 'Electronics' ? 'active' : ''}`}
+            className={`btn common_button font_family_common btn_equal ${selectedCategory === 'Electronics' ? 'activeShop' : ''}`}
             onClick={() => setSelectedCategory('Electronics')}>
             Electronics
           </button>
           {/*  */}
           <button
-            className={`btn common_button font_family_common btn_equal ${selectedCategory === 'Clothing' ? 'active' : ''}`}
+            className={`btn common_button font_family_common btn_equal ${selectedCategory === 'Clothing' ? 'activeShop' : ''}`}
             onClick={() => setSelectedCategory('Clothing')}>
             Clothing
           </button>
           {/* 6th Button */}
           <button
-            className={`btn common_button font_family_common btn_equal ${selectedCategory === 'Dessert' ? 'active' : ''}`}
+            className={`btn common_button font_family_common btn_equal ${selectedCategory === 'Dessert' ? 'activeShop' : ''}`}
             onClick={() => setSelectedCategory('Dessert')}>
             Dessert
           </button>

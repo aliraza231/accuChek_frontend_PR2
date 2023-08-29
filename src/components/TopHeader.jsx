@@ -1,6 +1,8 @@
 import React from 'react';
 
 const TopHeader = () => {
+  const storedUserName = localStorage.getItem('userName');
+   const storedUserId = localStorage.getItem('userId');
   const currentDate = new Date();
   const monthNames = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -28,7 +30,7 @@ const TopHeader = () => {
       <div className='row align-items-center'>
         <div className='col-md-6'>
           <div className='row'>
-            <h6 className='member_welcome font_family_common'>Good {timeOfDay}, Ahmed</h6>
+            <h6 className='member_welcome font_family_common'>Good {timeOfDay}, {storedUserName}</h6>
             <p className='date_time font_family_common'>{formattedDate}</p>
           </div>
         </div>
@@ -43,10 +45,10 @@ const TopHeader = () => {
                 <img src='/notification-icon.svg' alt='' />
               </div>
               <div className='doctor'>
-                <img src='/doctor-bigImage.png' width="50px" alt='' />
+                <img src='/doctor-bigImage.png' width="43px" alt='' />
               </div>
               <div className='doc_name'>
-                <p className='set_memberName'>Ahmed</p>
+                <p className='set_memberName'>{storedUserName}</p>
               </div>
               <div className='line p-1'>
                 <img src='/Line.svg' alt=''></img>

@@ -73,7 +73,7 @@ body::-webkit-scrollbar-thumb{
   justify-content: end;
 }
 input {
-  border-radius: 20px !important;
+  border-radius: 50px !important;
   border: 1px solid #26becf !important;
 }
 .form-select {
@@ -316,17 +316,6 @@ div:where(.swal2-container).swal2-center > .swal2-popup {
     border-radius: 8px;
     padding: 5px;
   }
-  .eye_password{
-    position: relative;
-    display: flex;
-    justify-content: end;
-    align-items: baseline;
-  }
-  .fa-eye{
-    margin-top: -27px;
-    margin-right: 15px;
-    cursor: pointer;
-  }
   .sign_btn:hover{
     background: #8eb927;
     color: white;
@@ -482,9 +471,9 @@ input[type=date]::-webkit-datetime-edit-year-field {
 .radeem{
   background: #8EB927;
 }
-.active{
-  /* background: #8EB927 !important; */
-  /* border: 1px solid #8EB927 !important; */
+.activeShop{
+  background: #8EB927 !important; 
+   border: 1px solid #8EB927 !important;
 }
 .shop_container{
   background: #FBFCFC;
@@ -533,9 +522,28 @@ div:where(.swal2-container).swal2-top-end>.swal2-popup, div:where(.swal2-contain
 
 /* improve css */
 
-.set_width:hover{
+.set_width:hover,
+.set_width.active{
   background-color: white;
   border-radius: 0px 25px 25px 0px;
+}
+.for_side_bar_prop:hover,
+.for_side_bar_prop.active {
+    /* background-color: white !important; */
+    /* border-radius: 0px 25px 25px 0px !important; */
+    /* Add any other styles you want */
+    border: none !important;
+    color: black !important;
+ } 
+
+.for_side_bar_prop > img .active {
+    background: red !important;
+ } 
+
+.set_width.active {
+  background-color: white;
+  border-radius: 0px 25px 25px 0px;
+  /* Add other styles */
 }
 .svg:hover{
   color: #000000 !important;
@@ -811,6 +819,7 @@ width: 553px;
 .sigin_Fields{
 font-size: 18px;
 color: #CBCBCB !important; 
+padding: 25px;
 }
 .sigin_Lables{
 font-size: 18px;
@@ -828,6 +837,9 @@ input{
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #CBCBCB !important;
   opacity: 1; /* Firefox */
+  padding: 10px;
+  letter-spacing: 0.5% ;
+
 }
 .create_Account_heading{
 font-size: 40px;
@@ -847,6 +859,25 @@ color: #2A2A2A;
   background: #FBFCFC !important;
 }
 
+.admin_sigin_Page{
+  font-size: 16px !important;
+  text-align: left;
+}
+#admin_container_height{
+  height: 450px !important;
+  padding: 51px;
+}
+.hide_eye{
+  margin-top: -1.5pc;
+  cursor: pointer;
+}
+#set_serch_height{
+  height: 60px !important;
+}
+#cources_serch{
+  height: 20px !important;
+  padding: 15px
+}
 
 /* 24/8/24 end */
 .member_cources_button{
@@ -861,7 +892,7 @@ color: #2A2A2A;
   background: #8EB927 !important;
 }
 .progress{
-  height: 15px !important;
+  /* height: 15px !important; */
 }
 
 @media screen and (max-width: 768px) {
@@ -914,8 +945,30 @@ color: #2A2A2A;
 
 
 
-@media screen and (max-width: 360) {
-
+@media screen and (max-width: 610px) {
+.doc_parent_div{
+  flex-direction: column;
+    width: auto;
+    margin: auto;
+    border-radius: 0px  ; 
+    padding: 0px;
+}
+.contol_width{
+  width: 55px;
+    height: 55px;
+    margin: auto;
+}
+.doc_parent_div{
+  flex-direction: column;
+    width: auto;
+    margin: auto;
+}
+.doc_child {
+  width: auto;
+}
+.doctor_profile {
+  margin-top: 1pc;
+}
 }
 
 
@@ -937,4 +990,17 @@ color: #2A2A2A;
     height:13pc !important;
   }
 }
+
+@media screen and (max-width: 1060px) {
+  .set_rows_wids{
+    width: 100% !important;
+    height: 680px !important;
+  }
+}
+@media screen and (max-width: 700px) {
+  .sigin_virtual_heading{
+    font-size: 30px;
+  }
+}
+
 

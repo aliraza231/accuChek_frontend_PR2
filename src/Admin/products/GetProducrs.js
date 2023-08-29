@@ -2,7 +2,7 @@ import React from "react";
 import { useState,useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
-import Loader from '../components/Loader'
+import Loader from '../../components/Loader'
 // import { getProductsApi, deleteProductApi, handleDelete } from "../../Configuration/Const";
 const GetProducrs = () => {
   const [getProducts, setProducts] = useState([]);

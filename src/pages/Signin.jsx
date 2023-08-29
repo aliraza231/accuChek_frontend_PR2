@@ -6,6 +6,7 @@ const Signin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordType, setPasswordType] = useState('password');
   const savebtnhandler = async (e) => {
     e.preventDefault();
     console.log( email, password);
@@ -38,16 +39,18 @@ const Signin = () => {
       // window.alert("Successfull")
     }
   };
-  const myFun=()=>{
-    const toggle = document.querySelector("#togglePassword");
-    const password = document.querySelector('#password');
-    toggle.addEventListener("click", function(){
-      const type = password.getAttribute('type') === "password" ? 'text':'password';
-      password.setAttribute("type", type);
-      this.classList.toggle('fa-eye-slash');
-    });
-  }
-  
+  // const myFun=()=>{
+  //   const toggle = document.querySelector("#togglePassword");
+  //   const password = document.querySelector('#password');
+  //   toggle.addEventListener("click", function(){
+  //     const type = password.getAttribute('type') === "password" ? 'text':'password';
+  //     password.setAttribute("type", type);
+  //     this.classList.toggle('fa-eye-slash');
+  //   });
+  // }
+  const togglePasswordVisibility = () => {
+    setPasswordType(prevType => prevType === 'password' ? 'text' : 'password');
+}
   return (
    <>
    <div className='container-fluid' >
@@ -101,13 +104,15 @@ const Signin = () => {
                          <label for="exampleInputPassword1" className="d-flex ms-3 form-label sigin_Lables">Password</label>
                          <input 
                          value={password}
-                         onChange={(e) => setPassword(e.target.value)} name="password" id="password" type="password" className="form-control inputs_background sigin_Fields fa-eye-slash " placeholder="Input your password in here" />
-                        <span className='eye_password'> <i className="fa fa-eye" id="togglePassword" onClick={myFun}></i></span>
+                         onChange={(e) => setPassword(e.target.value)} name="password" id="password" type={passwordType} className="form-control inputs_background sigin_Fields fa-eye-slash " placeholder="Input your password in here" />
+                        <div className='row hide_eye me-0 mb-2'>
+                        <i className={` d-flex  justify-content-end fa ${passwordType === 'password' ? 'fa-eye' : 'fa-eye-slash'}`} id="togglePassword" onClick={togglePasswordVisibility}></i>      
+                        </div>
                     </div>
                     {/* <br/> */}
                     <NavLink to="/ForgotPassword">
-                    <div className='mb-2 d-flex justify-content-end'>
-                       <a href='/ForgotPassword' className='forGot_Password' >Forgot passwod?</a>
+                    <div className='mb-2 d-flex justify-content-end mb-4'>
+                       <a href='/ForgotPassword' className='forGot_Password mb-5 mt-1' >Forgot passwod?</a>
                     </div>
                     </NavLink>
                        <div className=''>
@@ -123,15 +128,15 @@ const Signin = () => {
                        </div>
                     </form>
                     <NavLink to="/CreateAccont ">
-                    <div className='mb-2 d-flex justify-content-end mt-2'>
-                       <a href='/CreateAccont' className='forGot_Password' >Create Account?</a>
-                    </div>
+                    <div className='text-center mt-5'>
+                         <p className='about_account'>Doesn’t have an account? <span className='for_color ms-1'>  Sign up now</span></p>
+                       </div>
                     </NavLink>
                 </div>
                </div>
             </div>
         </div>
-    </div>
+    </div> 
   </div>
    </>
   )

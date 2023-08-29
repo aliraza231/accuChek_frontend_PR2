@@ -3,8 +3,9 @@ import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 const Layout = () => {
   const handleLogout = () => {
-    // localStorage.removeItem('jwtToken'); // Remove the token from local storage
-    // Redirect to the login page or wherever you want
+    localStorage.removeItem('jwtToken'); // Remove the token from local storage
+    localStorage.clear();
+  
   };
   return (
     <>
@@ -135,7 +136,8 @@ const Layout = () => {
         {/* Cource Routes end here */}
         <div className="row mt-5">
           <div className="col-12 mt-5">
-          <NavLink to="/Admin"><button onClick={handleLogout} className="btn btn-info w-100 fw-bold">Logout</button></NavLink>
+         
+          <NavLink to="/Admin"><button onClick={handleLogout} className="btn w-100 sign-btn_1 sign_btn">Logout  <span><i class="fa-solid fa-lock"></i></span> </button></NavLink>
           </div>
         </div>
       </div>

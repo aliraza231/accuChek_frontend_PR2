@@ -59,8 +59,8 @@ const navigate = useNavigate();
                 <br /><br />
                 <div className='row row-md-6 justify-content-center'>
                     <h3 className='text-center'>ACCU-CHEK ACADEMY <span>®</span></h3>
-                    <div className='col col-md-6  forgoot_root'>
-                        <div className='forgot_box'>
+                    <div className='col col-md-6  forgoot_root' id='admin_container_height'>
+                        <div className='forgot_box admin_sigin_Page'>
                             <h3 className='text-center text-decoration-underline'>Admin Login</h3>
                             <br/>
                             <div className='row'>
@@ -72,7 +72,9 @@ const navigate = useNavigate();
                                 <label>Admin Password</label>
                                 
                                     <input type={passwordType} id='password' onChange={(e)=>setPassword(e.target.value)} className='p-2' placeholder='Input Your Password Here' style={{ textAlign: "left", textIndent: '03%', width:"100%" }} />
-                                    <i className={`fa ${passwordType === 'password' ? 'fa-eye' : 'fa-eye-slash'}`} id="togglePassword" onClick={togglePasswordVisibility} style={{position:'absolute',marginLeft:'21%',marginTop:'03%',zIndex:"1",width:'30%'}}></i>
+                                   <div className='row hide_eye'>
+                                   <i className={` d-flex  justify-content-end fa ${passwordType === 'password' ? 'fa-eye' : 'fa-eye-slash'}`} id="togglePassword" onClick={togglePasswordVisibility}></i>
+                                   </div>
                             </div>
                             <br/>
                             <div className='d-flex justify-content-center ' >
