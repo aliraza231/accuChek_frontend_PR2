@@ -302,7 +302,7 @@ div:where(.swal2-container).swal2-center > .swal2-popup {
     height: 15% !important;
   }
   video{
-    border-radius: 8% !important;
+    border-radius: 1% !important;
   }
   iframe{
     border-radius: 8px !important;
@@ -523,9 +523,15 @@ div:where(.swal2-container).swal2-top-end>.swal2-popup, div:where(.swal2-contain
 /* improve css */
 
 .set_width:hover,
-.set_width.active{
+.set_width.active {
   background-color: white;
   border-radius: 0px 25px 25px 0px;
+}
+.set_width > padding-2 > svg:hover,
+.set_width.active {
+  background-color: white;
+  border-radius: 0px 25px 25px 0px;
+  background-color: #000000;
 }
 .for_side_bar_prop:hover,
 .for_side_bar_prop.active {
@@ -580,7 +586,7 @@ textarea{
   height: 100% !important;
 }
 .auto_height div{
-  height: 0% !important;
+  /* height: 10pc !important; */
   /* width: 0% !important; */
 }
 .shop_container_height{
@@ -602,6 +608,7 @@ textarea{
   font-weight: 700;
   font-size: 18px;
   line-height: 26px;
+  padding: 10px;
 }
 .doc_level{
   margin-left: 20px;
@@ -663,7 +670,7 @@ textarea{
     color: #8EB927;
 }
 .for_side_bar_prop{
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
   color: #FFFFFF;
 }
@@ -865,7 +872,7 @@ color: #2A2A2A;
 }
 #admin_container_height{
   height: 450px !important;
-  padding: 51px;
+  /* padding: 51px; */
 }
 .hide_eye{
   margin-top: -1.5pc;
@@ -879,6 +886,10 @@ color: #2A2A2A;
   padding: 15px
 }
 
+
+#topBar_Serch{
+  height: 20px !important;
+}
 /* 24/8/24 end */
 .member_cources_button{
   border-radius: 100px;
@@ -912,7 +923,7 @@ color: #2A2A2A;
   }
 }
 
-@media screen and (width: 700px) {
+@media screen and (max-width: 700px) {
  
   .dropdown{
     display: flex;
@@ -920,6 +931,20 @@ color: #2A2A2A;
     padding: 0px;
     margin: 0px;
   }
+  .set_width {
+    width: 75%;
+}
+  .dropdown {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center;
+}
+.padding{
+  align-self: center !important;
+}
+.padding a{
+  align-self: center !important;
+}
 }
 
 @media screen and (max-width: 560px) {
@@ -941,7 +966,16 @@ color: #2A2A2A;
   }
 }
 
-
+/* .dropdown {
+  display: flex;
+    flex-direction: column;
+}
+.padding{
+  align-self: center;
+}
+.padding img{
+  align-self: center;
+} */
 
 
 
@@ -969,11 +1003,14 @@ color: #2A2A2A;
 .doctor_profile {
   margin-top: 1pc;
 }
+
 }
 
 
 
-
+#full_page_player > vedio{
+  border-radius: 1% !important;
+}
 /* Pixel */
 
 @media screen and (max-width: 1060px) {
@@ -1004,3 +1041,13 @@ color: #2A2A2A;
 }
 
 
+.reward_child{
+   display: inline-flex ;
+    width: 83% ;
+    display: flex ;
+    justify-content: center ;
+    align-items: baseline ;
+    margin-top: -125px ;
+    position: absolute;
+    margin-left: 2pc;
+}

@@ -1,8 +1,12 @@
 import React from 'react';
-
+import { useState,useEffect } from 'react';
+import Swal from "sweetalert2";
 const TopHeader = () => {
-  const storedUserName = localStorage.getItem('userName');
+  const [userImage, setUserImage] = useState("");
+  const [getMember, setMember] = useState([]);
+   const storedUserName = localStorage.getItem('userName');
    const storedUserId = localStorage.getItem('userId');
+   const storedImg = localStorage.getItem('userImage');
   const currentDate = new Date();
   const monthNames = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -23,6 +27,10 @@ const TopHeader = () => {
   } else {
     timeOfDay = "Afternoon";
   }
+  console.log(userImage);
+
+ 
+  
   const formattedDate = `Today ${month} ${day}, ${year} | ${hours}:${minutes} ${amOrPm}`;
 
   return (
@@ -38,14 +46,15 @@ const TopHeader = () => {
           <div className='row'>
             <div className='right_container d-flex align-items-baseline'id='doc_hid3'>
               <div className='serch position-relative'>
-              <input type="text" className="search-hover" name="" placeholder="search here..." />
+              <input type="text" className="search-hover" name="" placeholder="search here..." id="topBar_Serch" style={{padding:"15px"}}/>
               <span> <i class="fa-solid fa-magnifying-glass"></i> </span>
               </div>
               <div className='notification'>
                 <img src='/notification-icon.svg' alt='' />
               </div>
               <div className='doctor'>
-                <img src='/doctor-bigImage.png' width="43px" alt='' />
+                {/* <img src='/doctor-bigImage.png' width="43px" alt='' /> */}
+                <img src={`http://localhost:5000/uploads/${storedImg}`} className='rounded-circle' width="50px" height='50px' alt=''  />
               </div>
               <div className='doc_name'>
                 <p className='set_memberName'>{storedUserName}</p>

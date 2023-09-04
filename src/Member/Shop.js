@@ -1,22 +1,18 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import Loader from '../components/Loader';
+import { API_Get_Products,API_Upload_Videos } from '../Configuration/Constant';
 const Shop = () => {
   const [getProducts, setProducts] = useState([]);
   const [isloading, setLoading] = useState(true);
 
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-
-
-
-
-
   useEffect(() => {
     getData();
   }, []);
   const getData = async () => {
-    let result = await fetch("http://128.199.221.11:5000/Admin/getProducts");
+    let result = await fetch(API_Get_Products);
     result = await result.json();
     console.log(result);
     if(result<0){
@@ -112,7 +108,7 @@ const Shop = () => {
   return(
     <div className='col-md-3 col-sm-6 col-xs-12 mb-5 set_card_showdow'>
             <div className="card product_card border-0" >
-                <img src={`http://128.199.221.11:5000/uploads/${product.image}`} height="277px" width="306px" className="card-img-top img-fluid" alt="..."/>
+                <img src={`${API_Upload_Videos}${product.image}`} height="277px" width="306px" className="card-img-top img-fluid" alt="..."/>
                 <div className="card-body">
                   <div className='product_details font_family_common d-flex justify-content-between align-items-center h-50'>
                   <h5 className="card-title font_family_common">{product.title}</h5>

@@ -31,6 +31,8 @@ import SigninAdmin from "./pages/SigninAdmin";
 // 
 import { isAuthenticated } from "./pages/auth";
 import { Navigate } from "react-router-dom";
+
+import MemberVideo from './Member/MemberVideo'
 function App() {
   return (
     <>
@@ -67,34 +69,14 @@ function App() {
             <Route path="/user/MemberHome" element={<MemberHome/>} />
             <Route path="/user/MemberCourses" element={<MemberCourses/>} />
             <Route path="/user/MemberCompleteCourses" element={<MemberCompleteCourses/>} />
+            <Route path="/user/MemberVideo/:id" element={<MemberVideo/>} />
             <Route path="/user/MemberSupportCommunity" element={<MemberSupportCommunity/>} />
             </Route>
           </Routes>
       </BrowserRouter>     
 
 
-{/* <MemberLayout/> */}
-{/* <MemberHome/> */}
 
-
-
-
-{/* <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MemberLayout />}>
-          </Route>
-        </Routes>
-      </BrowserRouter> */}
-
-{/* <TopHeader/> */}
-      {/* <BrowserRouter>
-        <Routes>
-          <Route path="/CreateAccont" element={<Signin />}>
-          <Route path="/Signin" element={<CreateAccont />}></Route>
-          <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
-          </Route>
-        </Routes>
-      </BrowserRouter> */}
 
 
 

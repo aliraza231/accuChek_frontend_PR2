@@ -3,6 +3,8 @@ import  { useState, useEffect } from 'react'
 import Loader from '../components/Loader';
 import ReactPlayer from 'react-player'
 import Swal from 'sweetalert2';
+import { API_Get_Courses,API_Upload_Videos } from '../Configuration/Constant';
+import { NavLink } from 'react-router-dom';
 const MemberCourses = () => {
 const [getFalseStaus_cources, setFalseStausCources] = useState([]);
 const [isloading, setLoading] = useState(true);
@@ -14,7 +16,7 @@ const [getProducts, setProducts] = useState([]);
     }, []);
   
     const getData = async () => {
-      let result = await fetch("http://128.199.221.11:5000/Admin/getCources");
+      let result = await fetch(API_Get_Courses);
       
       result = await result.json();
       if(result<0){
@@ -26,7 +28,7 @@ const [getProducts, setProducts] = useState([]);
       setLoading(false);
     };
      const getFalseStausCources = async () => {
-       let result = await fetch("http://128.199.221.11:5000/Admin/getCources");
+       let result = await fetch(API_Get_Courses);
        result = await result.json();
        console.log(result)
        console.log("hamzano stratus found")
@@ -64,29 +66,41 @@ const [getProducts, setProducts] = useState([]);
     const handleEnded = (index,VideoPoints)=>{
       Swal.fire({
         html: `
-          <div class='container' style='; height:' id='for_swal_back'>
-            <div class='row justify-content-center'>
-              <div class='col-md-6 forgoot_root' id="for_cliams">
-                <h6 class='text-center forgoot_root_h6'>CONGRATULATIONS</h6>
-                <div>
-                  <h6 class='text-center forgot_box'>You’ve received a Reward</h6>
-                  <div>
-                  <img src='/Star 5.svg' height='200px' alt='' />
-                  <span> <img src='/FullStar.png' height='50pxpx' alt=''/> </span>
-                  <p>${VideoPoints}</p>
-                 <div >
-                 
-                 
-                 </div>
-                  </div>
-                  <div class='d-flex justify-content-center'>
-                  
-                    <button class='sign_btn btn reset p-2 mt-3 text-white'>CLAIM</button>
-                  </div>
-                </div>
+       
+        <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container" class="swal2-popup swal2-modal swal2-show" 
+        tabindex="-1" role="dialog" aria-live="assertive" aria-modal="true" style="width: 100%;padding: 10px;background: rgba(255, 255, 255, 0.9) !important;
+        display: grid;"><button type="button" class="swal2-close" aria-label="Close this dialog" style="display: none;">×</button><ul class="swal2-progress-steps"
+         style="display: none;"></ul><div class="swal2-icon" style="display: none;"></div><img class="swal2-image" style="display: none;"><h2 class="swal2-title" 
+         id="swal2-title" style="display: none;">
+        </h2><div class="swal2-html-container" id="swal2-html-container" style="display: block;"><div aria-labelledby="swal2-title" 
+        aria-describedby="swal2-html-container" class="swal2-popup  swal2-modal swal2-show" background: rgba(255, 255, 255, 0.9); tabindex="-1" role="dialog" aria-live="assertive" 
+        aria-modal="true" 
+        style="width: 100%;padding: 10px;/* background: rgb(161 161 161 / 90%) !important; */display: grid;">
+        <div class="row justify-content-center">
+          <div class="col-md-6 forgoot_root" id="for_cliams" style="width: 100%">
+            <h6 class="text-center forgoot_root_h6">CONGRATULATIONS</h6>
+            <div>
+              <h6 class="text-center forgot_box">You’ve received a Reward</h6>
+              <div>
+              <img src="/Star 5.svg" height="200px" alt="">
+              <div class="reward_child">
+                <span> <img src="/FullStar.png" height="50pxpx" alt=""> </span>
+                <p>120</p>
+              </div>
+             <div>
+             
+             
+             </div>
+              </div>
+              <div class="d-flex justify-content-center">
+              
+                <button class="sign_btn btn reset p-2 mt-3 text-white">CLAIM</button>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
         `,
         showConfirmButton: false, // Hides the default "OK" button
         width: '40%',
@@ -94,7 +108,9 @@ const [getProducts, setProducts] = useState([]);
         background: 'rgba(255,255,255,0.9)',
       });
     }
-  
+  const vedioRedirect =()=>{
+
+  }
   return (
     <>
      {isloading?(
@@ -127,21 +143,28 @@ const [getProducts, setProducts] = useState([]);
             <div className='row ms-0 mb-5' key={product._id}>
             <div className='col-md-3 video_Thumbnail' style={{ height: '10%' }}>
                 {/* Video Player */}
+                {/* <NavLink to="/user/MemberVideo"> */}
+                <NavLink to={`/user/MemberVideo/${product._id}`}>
                 <ReactPlayer
+                
                 ref={playerRefs.current[index]}
-                url={`http://128.199.221.11:5000/uploads/${product.image}`}
-                controls={true}
+                // url={`${API_Upload_Videos}${product.image}`}
+                url={`http://localhost:5000/uploads/${product.image}`}
+                controls={false}
+                // light={true}
+                // light={`${API_Upload_Videos}${product.image}`}
                 onProgress={({ playedSeconds }) => handleTime(index, playedSeconds)}
                 onDuration={(videoDuration) => handleDuration(index, videoDuration)}
                 onEnded={()=>handleEnded(index,product.points)}
               />
+              </NavLink>
             </div>
             <div className='col mt-2'>
                 <div className='row'>
                   <p>{product.name}</p>
                   <p>{product.discription}</p>
                   <div className='d-flex justify-content-between ps-0'>
-                  <i className='fa-regular fa-clock ms-4'> &nbsp; {product.duration}</i>
+                  <i className='fa-regular fa-clock ms-4 '> &nbsp; {product.duration}</i>
                   <img src='/FullStar.png' className='ms-5'  width='30px' height='30px' alt=''/>{product.points}
                   </div>
                 </div>
@@ -200,8 +223,9 @@ const [getProducts, setProducts] = useState([]);
                         <div className='row auto_height'>
                             {/* <img height="80%" src='/Recommended-Course-1.png' className='rounded' width="100%"></img> */}
                             <ReactPlayer
-                                url={`http://128.199.221.11:5000/uploads/${falseStaus.image}`}
+                                url={`${API_Upload_Videos}${falseStaus.image}`}
                                 controls={true}
+                                light={'/Recommended-Course-4.png'}
                 />
                         </div>
                         <div className='row'>

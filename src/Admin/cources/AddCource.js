@@ -12,7 +12,9 @@ let AddCource = () => {
   let [duration, setDuration] = useState("");
   let [image, setImage] = useState(null);
   let [url, setUrl] = useState("");
+  const categories = ["true", "false"];
   let [errors, setErrors] = useState({});
+
   const [addedSuccessfully, setAddedSuccessfully] = useState(false);
   const navigate = useNavigate();
 
@@ -58,12 +60,12 @@ let AddCource = () => {
     formData.append("status", status);
     formData.append("duration", duration);
     formData.append("image", image);
-    formData.append("url", url);
+    formData.append("url", url); 
 
     try {
       console.log("IN If Condointment")
       // send a POST request to the server to add the product
-      let response = await axios.post("http://128.199.221.11:5000/Admin/addCources", formData);
+      let response = await axios.post("http://localhost:5000/Admin/addCources", formData);
       console.log(response.data); 
       if(response.status=== 201){
         Swal.fire("success!", "Cource add Sucessfuly!", "success");
@@ -207,7 +209,7 @@ let AddCource = () => {
                         <div className="alert alert-danger">{errors.points}</div>
                       )}
                     </div>
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                       <label
                         htmlFor="exampleInputPassword1"
                         className="d-flex ms-3 form-label"
@@ -226,7 +228,30 @@ let AddCource = () => {
                       {errors.status && (
                         <div className="alert alert-danger">{errors.status}</div>
                       )}
-                    </div>
+                    </div> */}
+                    <div className="mb-3">
+                    <label htmlFor="exampleInputPassword1" className="d-flex ms-3 form-label">
+                      Category
+                    </label>
+                    <select
+                      onBlur={handleBlur}
+                      onChange={(e) => setStatus(e.target.value)}
+                      name="status"
+                      className="form-control inputs_background textarea"
+                      id="category"
+                      value={status}
+                    >
+                      <option value="">Select a Status</option>
+                      {categories.map((cat, index) => (
+                        <option key={index} value={cat}>
+                          {cat}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.status && (
+                        <div className="alert alert-danger">{errors.status}</div>
+                      )}
+                  </div>
                     <div className="mb-3">
                       <label
                         htmlFor="exampleInputPassword1"
