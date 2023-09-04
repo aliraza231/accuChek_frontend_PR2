@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useState} from 'react'
 const MemberHome = () => {
   const storedUserName = localStorage.getItem('userName');
    const storedUserId = localStorage.getItem('userId');
+   const [userImage, setUserImage] = useState("");
+   const storedImg = localStorage.getItem('userImage');
   return (
     <>
        {/* Member Prodile  */}
@@ -10,7 +12,8 @@ const MemberHome = () => {
         <div className="container for_common_Top_margin" id='doc_image_container'>
     <div className='row ms-1 doctor_profile'>
       <div className='doctor_image doc_parent_div d-flex'>
-        <img src='/doctor-bigImage.png' width="138.67px" height="138.67px" alt='' className='contol_width' />
+        {/* <img src='https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg' width="138.67px" height="138.67px" alt='' className='contol_width' /> */}
+        <img src={`http://localhost:5000/uploads/${storedImg}`} className='rounded-circle' alt='' width="138.67px" height="138.67px" />
         <div className='doc_child ms-5'>
           <div className='d-flex ms-1'>
             <h6 className='doc_name'>{storedUserName} </h6>
@@ -172,7 +175,7 @@ const MemberHome = () => {
           <div className="col-md-6 width for_achivements_background set_rows_wids">
           <div className='row p-2'>
               <div className='col-md-6 p-2'>
-                <h3 className='achivement'>Completed Cources</h3>
+                <h3 className='achivement'>Completed Courses</h3>
               </div>
               <div className='col-md-6 text-end'>
               <p className='set_date'>19 feb 2019</p>
@@ -186,7 +189,7 @@ const MemberHome = () => {
               </span>
             </div>
             <div className='col-md-5'>
-              <h6 className='control_col'>Cource name</h6>
+              <h6 className='control_col'>Course name</h6>
               <div className='for_display progress_set_height'>
               <div className="progress progress_set_height" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
               <div className="progress-bar w-75 progress_set_height"></div>
@@ -205,7 +208,7 @@ const MemberHome = () => {
               </span>
             </div>
             <div className='col-md-5'>
-              <h6 className='control_col'>Cource name</h6>
+              <h6 className='control_col'>Course name</h6>
               <div className='for_display progress_set_height'>
               <div className="progress progress_set_height" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
               <div className="progress-bar w-75 progress_set_height"></div>
@@ -224,7 +227,7 @@ const MemberHome = () => {
               </span>
             </div>
             <div className='col-md-5'>
-              <h6 className='control_col'>Cource name</h6>
+              <h6 className='control_col'>Course name</h6>
               <div className='for_display progress_set_height'>
               <div className="progress progress_set_height" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
               <div className="progress-bar w-75 progress_set_height"></div>
@@ -243,7 +246,7 @@ const MemberHome = () => {
               </span>
             </div>
             <div className='col-md-5'>
-              <h6 className='control_col'>Cource name</h6>
+              <h6 className='control_col'>Course name</h6>
               <div className='for_display progress_set_height'>
               <div className="progress progress_set_height" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
               <div className="progress-bar w-75 progress_set_height"></div>
@@ -262,7 +265,7 @@ const MemberHome = () => {
               </span>
             </div>
             <div className='col-md-5'>
-              <h6 className='control_col'>Cource name</h6>
+              <h6 className='control_col'>Course name</h6>
               <div className='for_display progress_set_height'>
               <div className="progress progress_set_height" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
               <div className="progress-bar w-75 progress_set_height"></div>

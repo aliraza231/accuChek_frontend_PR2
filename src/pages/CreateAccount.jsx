@@ -1,55 +1,80 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Swal from "sweetalert2";
 const CreateAccount = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [country, setSelectedCountry] = useState("usa");
-  const [langguage, setSelectedLanguage] = useState("English");
-  const [confrim_password, setconfrim_password] = useState("");
+  const [language, setSelectedLanguage] = useState("English");
+  const [password, setPassword] = useState("");
+  const [confirm_password, setconfrim_password] = useState("");
+  let [image, setImage] = useState(null);
+
+  // otp
+  const [otp, setOTP] = useState("");
+
+  const requestOTPData = {
+    email,
+  };
+
+  // otpend
+  const [addedSuccessfully, setAddedSuccessfully] = useState(false);
+
+
   const savebtnhandler = async (e) => {
     e.preventDefault();
-    console.log(name, email, password, country, langguage, confrim_password);
-    let result = await fetch("http://128.199.221.11:5000/User/userRegister", {
-      method: "POST",
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-        country,
-        langguage,
-        confrim_password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (
-      !name ||
-      !email ||
-      !password ||
-      !country ||
-      !langguage ||
-      !confrim_password
-    ) {
-      console.log("Register Sucessfully");
+    if (password !== confirm_password) {
       Swal.fire({
-        position:"top-end",
+        icon: 'error',
+        title: 'Passwords do not match',
+      });
+      return;
+    }
+
+
+    let formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("country", country);
+    formData.append("language", language);
+    formData.append("password", password);
+    formData.append("confirm_password", confirm_password);
+    formData.append("image", image);
+
+    try {
+
+         let otp = await axios.post("http://localhost:5000/User/userRegister", formData);
+      console.log("IN If Condointment")
+      // send a POST request to the server to add the product
+      let response = await axios.post("http://localhost:5000/User/userRegister", formData);
+      console.log(response.data); 
+  
+       if(response.status=== 201){
+        Swal.fire("success!", "Register  Sucessfuly!", "success");
+        setAddedSuccessfully(true);
+        // resetFormData();
+      
+      navigate('/')
+      // window.alert("Successfull")
+    }else{
+      Swal.fire({
+        position:"center",
         icon: "error",
         title: "Oops...",
-        text: "Please enter your all required fields",
-        footer: '<a href="">Why do I have this issue?</a>',
+        text: "Register Failed",
       });
-    } else {
-      Swal.fire("Good job!", "Register Sucessfully!", "success");
-      navigate("/");
-    }
-    result = await result.json();
+    } 
 
-    console.log("RESULT after Fecth", result);
+    } catch (error) {
+      console.log(error);
+    }
+    
+  };
+  let handleImageChange = (e) => {
+    setImage(e.target.files[0]);
   };
   return (
   <>
@@ -131,7 +156,19 @@ const CreateAccount = () => {
                     </div>       
                     <div className="mb-3">
                         <label for="exampleInputPassword1" className="d-flex ms-3 form-label">Confirm Password</label>
-                        <input onChange={(e) => setconfrim_password(e.target.value)} name='confrim_password' type="password" className="form-control inputs_background" id="exampleInputPassword1" placeholder='Input your confirm password in here'/>
+                        <input onChange={(e) => setconfrim_password(e.target.value)} name='confirm_password' type="password" className="form-control inputs_background" id="exampleInputPassword1" placeholder='Input your confirm password in here'/>
+                    </div>
+                    <div className="mb-3">
+                        <label for="exampleInputPassword1" className="d-flex ms-3 form-label">Image</label>
+                        <input
+                        // onChange={(e) => setImage(e.target.value)}
+                        // onBlur={handleBlur}
+                        onChange={handleImageChange}
+                        name="image"
+                        type="file"
+                        className="form-control inputs_background"
+                        id="exampleInputPassword1"
+                      />
                     </div>
                    
                        <div className="mb-3 form-check ms-2">
@@ -145,6 +182,13 @@ const CreateAccount = () => {
                         type="submit"
                         value="Submit" className='btn sign-btn_1 sign_btn  '>Sign up</button>
                        </div>
+
+                       {/* otp */}
+                       {/* <div className="mb-3">
+  <label for="otp" className="d-flex ms-3 form-label">OTP</label>
+  <input onChange={(e) => setOTP(e.target.value)} name="otp" type="text" className="form-control inputs_background" id="otp" placeholder='Enter OTP received in email'/>
+</div> */}
+                       {/*  */}
                        <div className='text-center mt-1'>
                          <p className='or'>Or</p>
                        </div>

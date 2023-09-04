@@ -7,10 +7,10 @@ const UpdateMember = () => {
   const params = useParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [country, setSelectedCountry] = useState("usa");
+  const [country, setSelectedCountry] = useState("USA");
   const [langguage, setSelectedLanguage] = useState("English");
-  const [confrim_password, setConfrimPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm_password, setConfrimPassword] = useState("");
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const UpdateMember = () => {
 
   const getUserData = async () => {
     let result = await fetch(
-      `http://128.199.221.11:5000/User/getSingleMember/${params.id}`
+      `http://localhost:5000/User/getSingleMember/${params.id}`
     );
     result = await result.json();
     setName(result.name);
@@ -27,7 +27,7 @@ const UpdateMember = () => {
     setPassword(result.password);
     setSelectedCountry(result.country);
     setSelectedLanguage(result.langguage);
-    setConfrimPassword(result.confrim_password);
+    setConfrimPassword(result.confirm_password);
   };
 
   const handleSave = (event) => {
@@ -65,7 +65,7 @@ const UpdateMember = () => {
     if (Object.keys(validationErrors).length === 0) {
       try {
         let result = await fetch(
-          `http://128.199.221.11:5000/User/updateSingleMember/${params.id}`,
+          `http://localhost:5000/User/updateSingleMember/${params.id}`,
           {
             method: "PUT",
             body: JSON.stringify({
@@ -74,7 +74,7 @@ const UpdateMember = () => {
               password,
               country,
               langguage,
-              confrim_password
+              confirm_password
             }),
             headers: {
               "Content-Type": "application/json",
@@ -99,7 +99,7 @@ const UpdateMember = () => {
     password,
     country,
     langguage,
-    confrim_password,
+    confirm_password,
   };
 
   const schema = {
@@ -108,7 +108,7 @@ const UpdateMember = () => {
     password: Joi.string().min(8).max(100).required(),
     country: Joi.string().min(3).max(100).required(),
     langguage: Joi.string().min(3).max(100).required(),
-    confrim_password: Joi.string().min(8).max(100).required(),
+    confirm_password: Joi.string().min(8).max(100).required(),
   };
 
   return (
@@ -149,7 +149,7 @@ const UpdateMember = () => {
                         Email address
                       </label>
                       <input
-//                         // onChange={CHangeFunction}
+                        // onChange={CHangeFunction}
                         onChange={(e) => setEmail(e.target.value)}
                         onBlur={handleSave}
                         name="email"
@@ -157,7 +157,7 @@ const UpdateMember = () => {
                         className="form-control inputs_background"
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
-//                         // value={user.email}
+                        // value={user.email}
                         value={email}
                       />
                       {errors.email && (
@@ -171,7 +171,7 @@ const UpdateMember = () => {
                             <select
                               className="form-select inputs_background"
                               aria-label="Default select example"
-//                               // onChange={CHangeFunction}
+                               // onChange={CHangeFunction}
                               onChange={(e) => setSelectedCountry(e.target.value)}
                               onBlur={handleSave}
                               name="country"
@@ -247,16 +247,16 @@ const UpdateMember = () => {
                          // onChange={CHangeFunction}
                         onChange={(e) => setName(e.target.value)}
                         onBlur={handleSave}
-                        name="confrim_password"
+                        name="confirm_password"
                         type="password"
                         className="form-control inputs_background"
-                        id="exampleInputPassword1"
-                          value={user.confrim_password}
+                        id="exampleInputPassword2"
+                          value={user.confirm_password}
                         //value={confrim_password}
                       />
                       {errors.confrim_password && (
                         <div className="alert alert-danger">
-                          {errors.confrim_password}
+                          {errors.confirm_password}
                         </div>
                       )}
                     </div>

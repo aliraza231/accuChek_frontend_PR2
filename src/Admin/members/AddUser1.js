@@ -2,22 +2,24 @@ import React, { useState } from "react";
 import Joi from "joi-browser";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 const SideBar = () => {
   const navigate=useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [country, setSelectedCountry] = useState("usa");
-  const [langguage, setSelectedLanguage] = useState("English");
-  const [confrim_password, setConfrimPassword] = useState("");
+  const [language, setSelectedLanguage] = useState("English");
+  const [confirm_password, setConfrimPassword] = useState("");
+  let [image, setImage] = useState(null);
+  const [addedSuccessfully, setAddedSuccessfully] = useState(false);
   const [user, setUser] = useState({
     name: setName,
     email: setEmail,
     password: setPassword,
     country: setSelectedCountry,
-    langguage: setSelectedLanguage,
-    confrim_password: setConfrimPassword,
+    language: setSelectedLanguage,
+    confirm_password: setConfrimPassword,
   });
   const [errors, setErrors] = useState({});
 
@@ -26,8 +28,8 @@ const SideBar = () => {
     email: Joi.string().email().min(10).max(100).required(),
     password: Joi.string().min(8).max(100).required(),
     country: Joi.string().min(1).max(100).required(),
-    langguage: Joi.string().min(1).max(100).required(),
-    confrim_password: Joi.string().min(8).max(100).required(),
+    language: Joi.string().min(1).max(100).required(),
+    confirm_password: Joi.string().min(8).max(100).required(),
   };
 
   const validateProperty = (name, value) => {
@@ -53,32 +55,49 @@ const SideBar = () => {
   const savebtnhandler = async (e) => {
     e.preventDefault();
 
+    let formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("country", country);
+    formData.append("password", password);
+    formData.append("language", language);
+    formData.append("confirm_password", confirm_password);
+    formData.append("image", image);
+
     try {
-      let result = await fetch("http://128.199.221.11:5000/User/userRegister", {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if(result.status=== 201){
-      Swal.fire("success!", "User add Sucessfuly!", "success");
-    
-      navigate('/Admin/Dashboard/GetMembers');
-    // window.alert("Successfull")
-  }else{
-    Swal.fire({
-      position:"center",
-      icon: "error",
-      title: "Oops...",
-      text: "User added Failed",
-    });
-  } 
-    result = await result.json();
+      console.log("IN If Condointment")
+      // send a POST request to the server to add the product
+      let response = await axios.post("http://localhost:5000/User/userRegister", formData);
+      console.log(response.data); 
+      if(response.status=== 201){
+        Swal.fire("success!", "Cource add Sucessfuly!", "success");
+        setAddedSuccessfully(true);
+        resetFormData();
+      
+      navigate('/Admin/Dashboard/GetGetMembers')
+      // window.alert("Successfull")
+    }else{
+      Swal.fire({
+        position:"center",
+        icon: "error",
+        title: "Oops...",
+        text: "Cource added Failed",
+      });
+    } 
+
     } catch (error) {
       console.log(error);
     }
-    
+  };
+  const resetFormData = () => {
+    setName("");
+    setEmail("");
+    setSelectedCountry("");
+    setSelectedLanguage("");
+    setPassword("");
+    setConfrimPassword("");
+    setImage("");
+    setErrors({});
   };
 
   const CHangeFunction = (event) => {
@@ -89,6 +108,10 @@ const SideBar = () => {
     });
   };
 
+
+  let handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
   return (
     <>
       <div className="c" id="admin_user">
@@ -102,19 +125,22 @@ const SideBar = () => {
               </div>
               <div className="row">
                 <div className="form_body">
-                  <form>
+                  <form onSubmit={savebtnhandler} encType="multipart/form-data">
                     <div className="mb-3">
                       <label htmlFor="name" className="d-flex ms-3 mb-1">
                         Name
                       </label>
                       <input
-                        onChange={CHangeFunction}
+                        // onChange={CHangeFunction}
+                        onChange={(e) => setName(e.target.value)}
                         onBlur={handleSave}
                         name="name"
+                        value={name}
                         type="text"
                         className="form-control inputs_background"
                         id="user_name"
-                        value={user.name}
+                        // value={user.name}
+                       
                       />
                       {errors.name && (
                         <div className="alert alert-danger">{errors.name}</div>
@@ -128,14 +154,16 @@ const SideBar = () => {
                         Email address
                       </label>
                       <input
-                        onChange={CHangeFunction}
+                        // onChange={CHangeFunction}
+                        onChange={(e) => setEmail(e.target.value)}
                         onBlur={handleSave}
                         name="email"
                         type="email"
+                        value={email}
                         className="form-control inputs_background"
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
-                        value={user.email}
+                        // value={user.email}
                       />
                       {errors.email && (
                         <div className="alert alert-danger">{errors.email}</div>
@@ -148,10 +176,12 @@ const SideBar = () => {
                             <select
                               className="form-select inputs_background"
                               aria-label="Default select example"
-                              onChange={CHangeFunction}
+                              // onChange={CHangeFunction}
+                              onChange={(e) => setSelectedCountry(e.target.value)}
                               onBlur={handleSave}
                               name="country"
-                              value={user.country}
+                              value={country}
+                              // value={user.country}
                             >
                               <option value="usa">USA</option>
                               <option value="canada">Canada</option>
@@ -168,10 +198,12 @@ const SideBar = () => {
                           <div className="dropdown">
                             <select
                               className="form-select inputs_background"
-                              onChange={CHangeFunction}
+                              // onChange={CHangeFunction}
+                              onChange={(e) => setSelectedLanguage(e.target.value)}
                               onBlur={handleSave}
-                              name="langguage"
-                              value={user.langguage}
+                              name="language"
+                              value={language}
+                              // value={user.language}
                             >
                               <option value="english">English</option>
                               <option value="spanish">Spanish</option>
@@ -195,13 +227,15 @@ const SideBar = () => {
                         Password
                       </label>
                       <input
-                        onChange={CHangeFunction}
+                        // onChange={CHangeFunction}
+                        onChange={(e) => setPassword(e.target.value)}
                         onBlur={handleSave}
                         name="password"
+                        value={password}
                         type="password"
                         className="form-control inputs_background"
                         id="exampleInputPassword1"
-                        value={user.password}
+                        // value={user.password}
                       />
                       {errors.password && (
                         <div className="alert alert-danger">{errors.password}</div>
@@ -215,25 +249,42 @@ const SideBar = () => {
                         Confirm Password
                       </label>
                       <input
-                        onChange={CHangeFunction}
+                        // onChange={CHangeFunction}
+                        onChange={(e) => setConfrimPassword(e.target.value)}
                         onBlur={handleSave}
-                        name="confrim_password"
+                        name="confirm_password"
+                        value={confirm_password}
                         type="password"
                         className="form-control inputs_background"
                         id="exampleInputPassword1"
-                        value={user.confrim_password}
+                        // value={user.confirm_password}
                       />
                       {errors.confrim_password && (
                         <div className="alert alert-danger">
-                          {errors.confrim_password}
+                          {errors.confirm_password}
                         </div>
                       )}
                     </div>
-                    <br />
+                    <label
+                        htmlFor="exampleInputPassword1"
+                        className="d-flex ms-3 form-label"
+                      >
+                        Image
+                      </label>
+                    <input
+                        // onChange={(e) => setImage(e.target.value)}
+                        // onBlur={handleBlur}
+                        onChange={handleImageChange}
+                        name="image"
+                        type="file"
+                        
+                        className="form-control inputs_background mb-4"
+                        id="exampleInputPassword1"
+                      />
                     <div className="">
                       <button
                         className="btn sign-btn_1 sign_btn"
-                        onClick={savebtnhandler}
+                        // onClick={savebtnhandler}
                         type="submit"
                       >
                         Create User

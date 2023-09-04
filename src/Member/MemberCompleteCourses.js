@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
 import ReactPlayer from 'react-player';
+import { API_Get_CompleteVideoStatus,API_Get_UnCompletedCourseVideo,API_Upload_Videos } from '../Configuration/Constant';
 const MemberCompleteCourses = () => {
     const [getTrueCources,setTrueCources] = useState([]);
     const [getFalseStaus_cources, setFalseStausCources] = useState([]);
     const getTrueStausCources = async () => {
-        let result = await fetch("http://128.199.221.11:5000/User/getTrueStausCources");
+        let result = await fetch("http://localhost:5000/User/getTrueStausCources");
         result = await result.json();
         console.log(result)
         console.log("hamzano stratus found")
@@ -18,7 +19,7 @@ const MemberCompleteCourses = () => {
         // setLoading(false)
       };
       const getFalseStausCources = async () => {
-        let result = await fetch("http://128.199.221.11:5000/User/getFalseStausCources");
+        let result = await fetch("http://localhost:5000/User/getFalseStausCources");
         result = await result.json();
         console.log(result)
         console.log("hamzano stratus found")
@@ -65,7 +66,8 @@ const MemberCompleteCourses = () => {
                     <div className='col-sm-2' id="set_height_width">
                         {/* <img src='/medical-doctor.png' className='rounded'></img> */}
                     <ReactPlayer
-                    url={`http://128.199.221.11:5000/uploads/${trueCources.image}`}
+                    // url={`${API_Upload_Videos}${trueCources.image}`}
+                    url={`http://localhost:5000/uploads/${trueCources.image}`}
                     controls={true}
                     // className="set_height_width"
                     
@@ -116,7 +118,7 @@ const MemberCompleteCourses = () => {
                             {/* <img height="80%" src='/Recommended-Course-1.png' className='rounded' width="100%"></img> */}
                             <ReactPlayer
                                 // ref={playerRef}
-                                url={`http://128.199.221.11:5000/uploads/${falseStaus.image}`}
+                                url={`${API_Upload_Videos}${falseStaus.image}`}
                                 controls={true}
                                 // onProgress={handleTime}
                                 // onEnded={handleVideoEnded}
@@ -147,37 +149,7 @@ const MemberCompleteCourses = () => {
                     </div>
                     )
                 })}
-                  
-
-                    
-
-                    
-
-                    {/* <div className='col-md-2 col-sm-2 ms-2   border bg-white rounded p-0' style={{width:"23%"}}>
-                        <div className='row'>
-                            <img height="80%" src='/Recommended-Course-4.png' className='rounded' width="100%"></img>
-                        </div>
-                        <div className='row'>
-                            <p className='fs-6 mt-2 ms-1 fw-normal'> Course Name goes here with details</p>
-                        </div>
-                        <div className='row'>   
-                            <i className='fa-regular fa-clock ms-3'> &nbsp; 30 min</i>
-                        </div>
-                        <div className='row mt-2'> 
-                            <div className='col-md-2 m-0 p-0 me-2' style={{display:"flex",justifyContent:"right", height:"03%",width:"20%"}}>
-                                <img  src='/Award-star.png' style={{height:"03%",width:"60%"}}></img>
-                            </div>
-                            <div className='col-md-2 m-0 p-0' style={{height:"03%",width:"20%"}}>
-                                <span>300</span>
-                            </div>
-                        </div>
-                        <br></br>
-                        <div className='row'>
-                            <div class="col-md-12"  style={{display:"flex",justifyContent:"right"}}>
-                                <button type="button" class="btn me-2 mb-2" style={{width:"60%",backgroundColor:"#8EB927"}}>Start</button>
-                            </div>
-                        </div>
-                    </div> */}
+          
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactPlayer from 'react-player'
 import Loader from '../../components/Loader'
+import { API_Get_Courses, API_Admin_Delete_Course,API_Upload_Videos } from '../../Configuration/Constant';
 import Swal from "sweetalert2";
 // import {getCourcesApi} from "../../Configuration/Const"
 const GetCources = () => {
@@ -13,7 +14,7 @@ useEffect(() => {
 }, []);
 
 const getData = async () => {
-  let response = await fetch("http://128.199.221.11:5000/Admin/getCources") ;
+  let response = await fetch(API_Get_Courses) ;
   let result = await response.json();
   if(result<0){
     result.send("<h1>No Data!</h1>")
@@ -35,16 +36,16 @@ const handleDelete = async (id) => {
   }).then(async (result) => {
     if (result.isConfirmed) {
       // Delete the product
-      await fetch(`http://128.199.221.11:5000/Admin/dellCource/${id}`, {
+      await fetch(`${API_Admin_Delete_Course}${id}`, {
         method: "DELETE",
       })
         .then((response) => {
           if (response.ok) {
-            console.log("Cource deleted successfully");
+            console.log("Course deleted successfully");
             // Call getData to fetch updated product list
             getData();
           } else {
-            console.error("Error deleting Cource");
+            console.error("Error deleting Course");
           }
         })
         .catch((error) => {
@@ -53,7 +54,7 @@ const handleDelete = async (id) => {
       
       Swal.fire(
         'Deleted!',
-        'Your Cource has been deleted.',
+        'Your Course has been deleted.',
         'success'
       )
     }
@@ -84,7 +85,7 @@ let count2 = getProducts.length;
     ):( 
       <div className='c' id='admin_user'>
       {/* Heading */}
-        <h1 className='text-center'>All Cources</h1>
+        <h1 className='text-center'>All Courses</h1>
         <div className='container'>
           <div className='row mb-3'>
           <div class="row height d-flex justify-content-center align-items-center">
@@ -109,15 +110,12 @@ let count2 = getProducts.length;
               <div className="row mb-3 for_row_background">
               <div className='col-md-4'>
                   <div className="vedio_ThumNail">
-                    <ReactPlayer url={`http://128.199.221.11:5000/uploads/${Cource.image}`} controls={true} onProgress={handleTime}   onEnded={handleVideoEnded} />
+                    <ReactPlayer url={`${API_Upload_Videos}${Cource.image}`} controls={true} onProgress={handleTime}   onEnded={handleVideoEnded} />
                     {console.log(`Time taken: ${endTime && startTime ? (endTime - startTime) / 1000 + " seconds" : "N/A"}`)}
 
                   </div>
               </div>
-              {/* <div>
-              <img src={Cource.image} alt='' />
-              <p>{Cource.image}</p>
-              </div> */}
+              
               <div className='col-md-3'>
                 <div className="cource_details">
                     <h6>{Cource.name}</h6>

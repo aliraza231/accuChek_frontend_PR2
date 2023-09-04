@@ -14,7 +14,7 @@ const GetMembers = () => {
   }, []);
 
   const getData = async () => {
-    let result = await fetch("http://128.199.221.11:5000/User/getMembers");
+    let result = await fetch("http://localhost:5000/User/getMembers");
     result = await result.json();
     if(result<0){
       result.send("<h1>No Data!</h1>")
@@ -36,7 +36,7 @@ const GetMembers = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         // Delete the product
-        await fetch(`http://128.199.221.11:5000/User/dellMember/${id}`, {
+        await fetch(`http://localhost:5000/User/dellMember/${id}`, {
           method: "DELETE",
         })
           .then((response) => {
@@ -54,7 +54,7 @@ const GetMembers = () => {
         
         Swal.fire(
           'Deleted!',
-          'User has been deleted.',
+          'Member deleted.',
           'success'
         )
       }
@@ -70,11 +70,13 @@ const GetMembers = () => {
           {getMember.map((member) => {
             return (
               <div className="col-md-3">
-                <div className="member_card ms-2 text-center mb-5">
+                <div className="member_card ms-2 text-center mb-5" style={{height:"300px"}}>
+                <img className="card-img-top"  src={`http://localhost:5000/uploads/${member.image}`} width='100px' height='130px' alt="Card image cap" />
+                
                   <h6>{member.name}</h6>
                   <p>{member.email}</p>
                   <h6>{member.country}</h6>
-                  <h6>{member.langguage}</h6>
+                  <h6>{member.language}</h6>
                   <div
                     className="btn-group mb-4"
                     role="group"
@@ -88,7 +90,6 @@ const GetMembers = () => {
                     <button 
                     onClick={() => {
                       handleDelete(member._id);
-                      // toast.error("Data Delete successfully");
                       console.log(member._id);
                     }}
                     type="button" className="btn btn-danger">
@@ -99,26 +100,7 @@ const GetMembers = () => {
               </div>
             );
           })}
-          {/* <div className="col-md-3">
-            <div className="card ms-2 text-center">
-              <h4>Ali Raza</h4>
-              <p>hamzazia5550099@gmail.com</p>
-              <h4>USA</h4>
-              <h4>SPANISH</h4>
-              <div
-                className="btn-group"
-                role="group"
-                aria-label="Basic example"
-              >
-                <button type="button" className="btn btn-warning">
-                  Edit
-                </button>
-                <button type="button" className="btn btn-danger">
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div> */}
+        
         </div>
       </div>
       

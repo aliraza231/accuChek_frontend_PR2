@@ -3,9 +3,9 @@ import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 const Layout = () => {
   const handleLogout = () => {
-    localStorage.removeItem('jwtToken'); // Remove the token from local storage
+    localStorage.removeItem('jwtToken'); 
     localStorage.clear();
-  
+    window.location.reload(true);
   };
   return (
     <>
@@ -45,7 +45,7 @@ const Layout = () => {
                     <NavLink to="/Admin/Dashboard/GetMembers">
                       <li>
                         <a className="dropdown-item" href="#">
-                          Get All Member
+                          All Member
                         </a>
                       </li>
                     </NavLink>
@@ -84,7 +84,7 @@ const Layout = () => {
                     <NavLink to="/Admin/Dashboard/GetProducrs">
                       <li>
                         <a className="dropdown-item" href="#">
-                          Get All Products
+                          All Products
                         </a>
                       </li>
                     </NavLink>
@@ -110,20 +110,20 @@ const Layout = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Cource
+                    Course
                   </a>
                   <ul class="dropdown-menu">
                     <NavLink to="/Admin/Dashboard/AddCource">
                       <li>
                         <a className="dropdown-item" href="#">
-                          Add Cource
+                          Add Course
                         </a>
                       </li>
                     </NavLink>
                     <NavLink to="/Admin/Dashboard/GetCources">
                       <li>
                         <a className="dropdown-item" href="#">
-                          Get All Cources
+                          All Courses
                         </a>
                       </li>
                     </NavLink>
