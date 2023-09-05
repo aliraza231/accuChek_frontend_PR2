@@ -2,6 +2,8 @@
 export const API_Get_Courses = "http://128.199.221.11:5000/Admin/getCources";
 //Uploading videos
 export const API_Upload_Videos = `http://128.199.221.11:5000/uploads/`;
+// Geting Single Video
+export const Api_Get_Single_Video = "http://localhost:5000/Admin/getSingleCourse";
 //Getting Videos which is completed by User 
 export const API_Get_CompleteVideoStatus = 'http://128.199.221.11:5000/User/getTrueStausCources';
 //Getting all products
@@ -34,3 +36,8 @@ export const API_Get_SingleProduct = 'http://128.199.221.11:5000/Admin/getSingle
 export const API_UpdateProduct = 'http://128.199.221.11:5000/Admin/updateProduct/';
 //Get False Status Course Videos
 export const API_Get_UnCompletedCourseVideo = 'http://128.199.221.11:5000/User/getFalseStausCources';
+
+
+// my Test Object
+export const mySiginApi = "http://localhost:5000/User/userSigin";
+export const myAPI_Upload_Videos = `http://localhost:5000/uploads/`;

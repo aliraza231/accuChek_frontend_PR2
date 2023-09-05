@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Swal from "sweetalert2";
 import Joi from "joi-browser";
 import { useParams } from 'react-router-dom';
-
+import {API_Get_SingleUser,API_UpdateUser} from "../../Configuration/Constant"
 const UpdateMember = () => {
   const params = useParams();
   const [name, setName] = useState("");
@@ -19,7 +19,8 @@ const UpdateMember = () => {
 
   const getUserData = async () => {
     let result = await fetch(
-      `http://localhost:5000/User/getSingleMember/${params.id}`
+      // `http://localhost:5000/User/getSingleMember/${params.id}`
+       `${API_Get_SingleUser}${params.id}`
     );
     result = await result.json();
     setName(result.name);
@@ -65,7 +66,7 @@ const UpdateMember = () => {
     if (Object.keys(validationErrors).length === 0) {
       try {
         let result = await fetch(
-          `http://localhost:5000/User/updateSingleMember/${params.id}`,
+          (`${API_UpdateUser}${params.id}`),
           {
             method: "PUT",
             body: JSON.stringify({

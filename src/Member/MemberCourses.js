@@ -148,8 +148,8 @@ const [getProducts, setProducts] = useState([]);
                 <ReactPlayer
                 
                 ref={playerRefs.current[index]}
-                // url={`${API_Upload_Videos}${product.image}`}
-                url={`http://localhost:5000/uploads/${product.image}`}
+                url={`${API_Upload_Videos}${product.image}`}
+                // url={`http://localhost:5000/uploads/${product.image}`}
                 controls={false}
                 // light={true}
                 // light={`${API_Upload_Videos}${product.image}`}

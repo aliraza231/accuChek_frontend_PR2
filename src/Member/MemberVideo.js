@@ -3,8 +3,7 @@ import  { useState, useEffect } from 'react'
 import Loader from '../components/Loader';
 import ReactPlayer from 'react-player'
 import Swal from 'sweetalert2';
-// import { API_Get_Courses, API_Upload_Videos } from '../Constants/Constant.js';
-// import { wait } from '@testing-library/user-event/dist/utils';
+import {Api_Get_Single_Video,API_Get_UnCompletedCourseVideo,API_Upload_Videos} from "../Configuration/Constant"
 import { useParams } from 'react-router-dom';
 const MemberVideo = () => {
   const [getSingleCourse, setSingleCourse] = useState([""]);
@@ -24,7 +23,8 @@ useEffect(() => {
 
 
 const getCourseData = async () => {
-  let result = await fetch(`http://localhost:5000/Admin/getSingleCourse/${params.id}`);
+  // let result = await fetch(`http://localhost:5000/Admin/getSingleCourse/${params.id}`);
+  let result = await fetch(`${Api_Get_Single_Video}${params.id}`);
   result = await result.json();
   if(result<0){
         result.send("<h1>No Data!</h1>")
@@ -33,16 +33,15 @@ const getCourseData = async () => {
   setLoading(false);
   
 };
-
 const getFalseStausCources = async () => {
-  let result = await fetch("http://localhost:5000/Admin/getFalseStausCources");
+  let result = await fetch(API_Get_UnCompletedCourseVideo);
   result = await result.json();
   console.log(result)
   console.log("hamzano stratus found")
   if(result<0){
     result.send("<h1>No Data!</h1>")
   }
- console.log("Result from API Members list", result);
+ console.log("Result from API Course list", result);
   setFalseStausCources(result);
   console.log(result._id);
   setLoading(false)
@@ -133,7 +132,7 @@ const getFalseStausCources = async () => {
                   <ReactPlayer 
                   id='full_page_player'
                   ref={playerRefs.current[index]}
-                  url={`http://localhost:5000/uploads/${product.image}`}
+                  url={`${API_Upload_Videos}${product.image}`}
                   controls={true}
                   onProgress={({ playedSeconds }) => handleTime(index, playedSeconds)}
                   onDuration={(videoDuration) => handleDuration(index, videoDuration)}
@@ -167,7 +166,6 @@ const getFalseStausCources = async () => {
                               width: `${progress[index] || 0}%`,
                             }}
                       >
-                        
                       </div>
                       
                   </div>
@@ -203,7 +201,7 @@ const getFalseStausCources = async () => {
                         <div className='row auto_height'>
                             {/* <img height="80%" src='/Recommended-Course-1.png' className='rounded' width="100%"></img> */}
                             <ReactPlayer
-                                // url={`${API_Upload_Videos}${falseStaus.image}`}
+                                url={`${API_Upload_Videos}${falseStaus.image}`}
                                 controls={true}
                                 light={'/Recommended-Course-4.png'}
                 />

@@ -38,7 +38,8 @@ const navigate = useNavigate();
     e.preventDefault();
     console.log(email, password);
     
-    let result = await fetch("http://localhost:5000/Admin/adminSigin", {
+    // let result = await fetch("http://localhost:5000/Admin/adminSigin", {
+      let result = await fetch(API_Admin_SignIn, {
       method: "POST",
       body: JSON.stringify({
         email,

@@ -1051,3 +1051,13 @@ color: #2A2A2A;
     position: absolute;
     margin-left: 2pc;
 }
+.alert-danger{
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    height: 2pc;
+    margin: 0pc;
+    width: 70%;
+    margin: auto;
+
+}

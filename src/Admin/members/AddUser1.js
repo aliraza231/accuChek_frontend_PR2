@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Joi from "joi-browser";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import {API_User_Rregistration} from '../../Configuration/Constant'
 import axios from "axios";
 const SideBar = () => {
   const navigate=useNavigate();
@@ -67,7 +68,8 @@ const SideBar = () => {
     try {
       console.log("IN If Condointment")
       // send a POST request to the server to add the product
-      let response = await axios.post("http://localhost:5000/User/userRegister", formData);
+      // let response = await axios.post("http://localhost:5000/User/userRegister", formData);
+      let response = await axios.post(API_User_Rregistration, formData);
       console.log(response.data); 
       if(response.status=== 201){
         Swal.fire("success!", "Cource add Sucessfuly!", "success");

@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 import Loader from '../../components/Loader'
 // import { getProductsApi } from "../../Configuration/Const";
+import {API_Get_Users,API_Admin_Delete_User,API_Upload_Videos} from '../../Configuration/Constant'
 const GetMembers = () => {
   const [getMember, setMember] = useState([]);
   const [isloading, setLoading] = useState(true)
@@ -14,8 +15,8 @@ const GetMembers = () => {
   }, []);
 
   const getData = async () => {
-    let result = await fetch("http://localhost:5000/User/getMembers");
-    result = await result.json();
+    let result = await fetch(API_Get_Users);
+    result = await result.json(); 
     if(result<0){
       result.send("<h1>No Data!</h1>")
     }
@@ -36,7 +37,8 @@ const GetMembers = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         // Delete the product
-        await fetch(`http://localhost:5000/User/dellMember/${id}`, {
+        // await fetch(`http://localhost:5000/User/dellMember/${id}`, {
+          await fetch(`${API_Admin_Delete_User}${id}`, {
           method: "DELETE",
         })
           .then((response) => {
@@ -71,7 +73,9 @@ const GetMembers = () => {
             return (
               <div className="col-md-3">
                 <div className="member_card ms-2 text-center mb-5" style={{height:"300px"}}>
-                <img className="card-img-top"  src={`http://localhost:5000/uploads/${member.image}`} width='100px' height='130px' alt="Card image cap" />
+                {/* <img className="card-img-top"  src={`http://localhost:5000/uploads/${member.image}`} width='100px' height='130px' alt="Card image cap" /> */}
+                <img className="card-img-top"  src={`${API_Upload_Videos}${member.image}`} width='100px' height='130px' alt="Card image cap" />
+                
                 
                   <h6>{member.name}</h6>
                   <p>{member.email}</p>
