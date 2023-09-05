@@ -3,7 +3,7 @@ import { useState,useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 import Loader from '../../components/Loader'
-// import { getProductsApi, deleteProductApi, handleDelete } from "../../Configuration/Const";
+import { API_Get_Products, API_Admin_Delete_Product,API_Upload_Videos,API_UpdateProduct,  } from "../../Configuration/Constant";
 const GetProducrs = () => {
   const [getProducts, setProducts] = useState([]);
   const [isloading, setLoading] = useState(true)
@@ -13,7 +13,8 @@ const GetProducrs = () => {
   }, []);  
   const getData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/Admin/getProducts"); // Call the API
+      // const response = await fetch("http://localhost:5000/Admin/getProducts"); 
+       const response = await fetch(API_Get_Products); 
       const result = await response.json(); 
   
       console.log("Result from API Members list", result);
@@ -41,7 +42,8 @@ const GetProducrs = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         // Delete the product
-        await fetch(`http://localhost:5000/Admin/dellProduct/${id}`, {
+        // await fetch(`http://localhost:5000/Admin/dellProduct/${id}`, {
+           await fetch(`${API_Admin_Delete_Product}${id}`, {
           method: "DELETE",
         })
           .then((response) => {
@@ -88,7 +90,8 @@ const GetProducrs = () => {
             <td>
               <div class="d-flex align-items-center">
                 <img
-                  src={`http://localhost:5000/uploads/${product.image}`}
+                  // src={`http://localhost:5000/uploads/${product.image}`}
+                  rc={`${API_Upload_Videos}${product.image}`}
                   alt=""
                   style={{ width: "45px", height: "45px" }}
                   class="rounded-circle"
@@ -108,7 +111,8 @@ const GetProducrs = () => {
               <p class="fw-normal mb-1">{product.points}</p>
             </td>
             <td className="d-flex">
-            <NavLink to={`/Admin/Dashboard/UpdateProduct/${product._id}`}>
+            {/* <NavLink to={`/Admin/Dashboard/UpdateProduct/${product._id}`}> */}
+            <NavLink to={`${API_UpdateProduct}${product._id}`}>
               <button type="button" className="btn btn-warning btn-sm me-2">
               <i class="fa-solid fa-pen-to-square"></i>
               </button>

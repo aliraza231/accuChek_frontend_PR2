@@ -6,7 +6,8 @@ const MemberCompleteCourses = () => {
     const [getTrueCources,setTrueCources] = useState([]);
     const [getFalseStaus_cources, setFalseStausCources] = useState([]);
     const getTrueStausCources = async () => {
-        let result = await fetch("http://localhost:5000/User/getTrueStausCources");
+        // let result = await fetch("http://localhost:5000/User/getTrueStausCources");
+         let result = await fetch(API_Get_CompleteVideoStatus);
         result = await result.json();
         console.log(result)
         console.log("hamzano stratus found")
@@ -19,7 +20,8 @@ const MemberCompleteCourses = () => {
         // setLoading(false)
       };
       const getFalseStausCources = async () => {
-        let result = await fetch("http://localhost:5000/User/getFalseStausCources");
+        // let result = await fetch("http://localhost:5000/User/getFalseStausCources");
+          let result = await fetch(API_Get_UnCompletedCourseVideo);
         result = await result.json();
         console.log(result)
         console.log("hamzano stratus found")
@@ -67,7 +69,7 @@ const MemberCompleteCourses = () => {
                         {/* <img src='/medical-doctor.png' className='rounded'></img> */}
                     <ReactPlayer
                     // url={`${API_Upload_Videos}${trueCources.image}`}
-                    url={`http://localhost:5000/uploads/${trueCources.image}`}
+                    url={`${API_Upload_Videos}${trueCources.image}`}
                     controls={true}
                     // className="set_height_width"
                     
@@ -124,7 +126,7 @@ const MemberCompleteCourses = () => {
                                 // onEnded={handleVideoEnded}
                                 // onProgress={handleTime}
                                 // onEnded={handleVideoEnded}
-                />
+                                />
                         </div>
                         <div className='row'>
                             <p className='fs-6 mt-2 ms-1 fw-normal'> {falseStaus.name}</p>

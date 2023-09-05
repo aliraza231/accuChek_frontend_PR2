@@ -2,7 +2,9 @@ import React from 'react'
 import { useState,useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Joi from "joi-browser";
 import Swal from "sweetalert2";
+import {API_User_Rregistration} from "../Configuration/Constant"
 const CreateAccount = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -13,6 +15,34 @@ const CreateAccount = () => {
   const [confirm_password, setconfrim_password] = useState("");
   let [image, setImage] = useState(null);
 
+  // joi implementation
+  const [errors, setErrors] = useState({});
+  const schema = {
+    name: Joi.string().min(3).max(20).required(),
+    email: Joi.string().min(3).max(30).required(),
+    country: Joi.string().min(3).max(20).required(),
+    language: Joi.string().min(3).max(20).required(),
+    password: Joi.string().min(3).max(20).required(),
+    confirm_password: Joi.string().min(3).max(20).required(),
+  };
+
+  const validateProperty = (name, value) => {
+    const obj = { [name]: value };
+    const subSchema = { [name]: schema[name] };
+    const result = Joi.validate(obj, subSchema);
+    const { error } = result;
+    return error ? error.details[0].message : null;
+  };
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+    const error = validateProperty(name, value);
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
+  };
+  // joi end
   // otp
   const [otp, setOTP] = useState("");
 
@@ -20,12 +50,23 @@ const CreateAccount = () => {
     email,
   };
 
+  
+
   // otpend
   const [addedSuccessfully, setAddedSuccessfully] = useState(false);
 
 
   const savebtnhandler = async (e) => {
     e.preventDefault();
+
+    if (!name || !email || !country || !language || !password || !confirm_password || !image) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Please fill out all required fields',
+      });
+      return;
+    }
+
     if (password !== confirm_password) {
       Swal.fire({
         icon: 'error',
@@ -46,10 +87,11 @@ const CreateAccount = () => {
 
     try {
 
-         let otp = await axios.post("http://localhost:5000/User/userRegister", formData);
+      //  let otp = await axios.post("http://localhost:5000/User/userRegister", formData);
       console.log("IN If Condointment")
       // send a POST request to the server to add the product
-      let response = await axios.post("http://localhost:5000/User/userRegister", formData);
+      // let response = await axios.post("http://localhost:5000/User/userRegister", formData);
+        let response = await axios.post(API_User_Rregistration, formData);
       console.log(response.data); 
   
        if(response.status=== 201){
@@ -59,7 +101,15 @@ const CreateAccount = () => {
       
       navigate('/')
       // window.alert("Successfull")
-    }else{
+    }else if(response.status=== 500 ){
+      Swal.fire({
+        position:"center",
+        icon: "Internal Server Error",
+        title: "Oops...",
+        text: "Register Failed",
+      });
+    }
+    else{
       Swal.fire({
         position:"center",
         icon: "error",
@@ -119,11 +169,17 @@ const CreateAccount = () => {
                 <form>
                     <div className="mb-3">
                         <label for="name" className="d-flex ms-3 mb-1">Name</label>
-                        <input onChange={(e) => setName(e.target.value)} name='name' type="string" className="form-control inputs_background" id="user_name" placeholder='Input your name in here' />
+                        <input onBlur={handleBlur} onChange={(e) => setName(e.target.value)} name='name' type="string" className="form-control inputs_background" id="user_name" placeholder='Input your name in here' />
+                        {errors.name && (
+                      <div className="alert alert-danger  ">{errors.name}</div>
+                    )}
                     </div>
                     <div className="mb-3">
                         <label for="exampleInputEmail1" className="d-flex ms-3 mb-1">Email</label>
-                        <input onChange={(e) => setEmail(e.target.value)} name='email' type="email" className="form-control inputs_background" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='Input your email in here'/>
+                        <input onBlur={handleBlur} onChange={(e) => setEmail(e.target.value)} name='email' type="email" className="form-control inputs_background" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='Input your email in here'/>
+                        {errors.email && (
+                      <div className="alert alert-danger  ">{errors.email}</div>
+                    )}
                     </div>
                     <div className='row'>
                          <div className='row'>
@@ -151,12 +207,18 @@ const CreateAccount = () => {
                          </div>
                            <br/>
                       <div className="mb-3">
-                         <label for="exampleInputPassword1" className="d-flex ms-3 form-label">Password</label>
-                         <input onChange={(e) => setPassword(e.target.value)} name="password" type="password" className="form-control inputs_background" id="exampleInputPassword1" placeholder='Input your password in here'/>
+                         <label  for="exampleInputPassword1" className="d-flex ms-3 form-label">Password</label>
+                         <input onBlur={handleBlur} onChange={(e) => setPassword(e.target.value)} name="password" type="password" className="form-control inputs_background" id="exampleInputPassword1" placeholder='Input your password in here'/>
+                         {errors.password && (
+                      <div className="alert alert-danger  ">{errors.password}</div>
+                    )}
                     </div>       
                     <div className="mb-3">
                         <label for="exampleInputPassword1" className="d-flex ms-3 form-label">Confirm Password</label>
-                        <input onChange={(e) => setconfrim_password(e.target.value)} name='confirm_password' type="password" className="form-control inputs_background" id="exampleInputPassword1" placeholder='Input your confirm password in here'/>
+                        <input onBlur={handleBlur} onChange={(e) => setconfrim_password(e.target.value)} name='confirm_password' type="password" className="form-control inputs_background" id="exampleInputPassword1" placeholder='Input your confirm password in here'/>
+                        {errors.confirm_password && (
+                      <div className="alert alert-danger  ">{errors.confirm_password}</div>
+                    )}
                     </div>
                     <div className="mb-3">
                         <label for="exampleInputPassword1" className="d-flex ms-3 form-label">Image</label>
@@ -185,9 +247,9 @@ const CreateAccount = () => {
 
                        {/* otp */}
                        {/* <div className="mb-3">
-  <label for="otp" className="d-flex ms-3 form-label">OTP</label>
-  <input onChange={(e) => setOTP(e.target.value)} name="otp" type="text" className="form-control inputs_background" id="otp" placeholder='Enter OTP received in email'/>
-</div> */}
+                        <label for="otp" className="d-flex ms-3 form-label">OTP</label>
+                        <input onChange={(e) => setOTP(e.target.value)} name="otp" type="text" className="form-control inputs_background" id="otp" placeholder='Enter OTP received in email'/>
+                      </div> */}
                        {/*  */}
                        <div className='text-center mt-1'>
                          <p className='or'>Or</p>

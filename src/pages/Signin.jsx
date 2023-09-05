@@ -4,7 +4,7 @@ import Joi from "joi-browser";
 import {Link,NavLink, useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import Swal from "sweetalert2";
-import { API_User_SignIn } from '../Configuration/Constant';
+import { API_User_SignIn} from '../Configuration/Constant';
 const Signin = () => {
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState('password');
@@ -42,7 +42,8 @@ const Signin = () => {
     console.log(email, password);
   
     try {
-      let result = await fetch("http://localhost:5000/User/userSigin", {
+      // let result = await fetch("http://localhost:5000/User/userSigin", {
+        let result = await fetch(API_User_SignIn, {
         method: "POST",
         body: JSON.stringify({
           email,

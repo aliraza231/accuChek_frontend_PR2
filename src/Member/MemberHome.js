@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import {API_Upload_Videos} from "../Configuration/Constant"
 const MemberHome = () => {
   const storedUserName = localStorage.getItem('userName');
    const storedUserId = localStorage.getItem('userId');
@@ -10,10 +11,10 @@ const MemberHome = () => {
         {/* <div className="c" id="admin_user"> */}
         <div className='user_profile_root_crad position-absolute ps-2' style={{width:"78%",marginLeft:"20%"}}>
         <div className="container for_common_Top_margin" id='doc_image_container'>
-    <div className='row ms-1 doctor_profile'>
+        <div className='row ms-1 doctor_profile'>
       <div className='doctor_image doc_parent_div d-flex'>
-        {/* <img src='https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg' width="138.67px" height="138.67px" alt='' className='contol_width' /> */}
-        <img src={`http://localhost:5000/uploads/${storedImg}`} className='rounded-circle' alt='' width="138.67px" height="138.67px" />
+        {/* <img src={`http://localhost:5000/uploads/${storedImg}`} className='rounded-circle' alt='' width="138.67px" height="138.67px" /> */}
+        <img src={`${API_Upload_Videos}${storedImg}`} className='rounded-circle' alt='' width="138.67px" height="138.67px" />
         <div className='doc_child ms-5'>
           <div className='d-flex ms-1'>
             <h6 className='doc_name'>{storedUserName} </h6>

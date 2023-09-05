@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Joi from 'joi-browser';
 import Swal from "sweetalert2";
 import axios from "axios";
+import {API_Admin_AddCourse} from '../../Configuration/Constant'
 import { useNavigate } from 'react-router-dom';
 let AddCource = () => {
   let [name, setName] = useState("");
@@ -65,7 +66,8 @@ let AddCource = () => {
     try {
       console.log("IN If Condointment")
       // send a POST request to the server to add the product
-      let response = await axios.post("http://localhost:5000/Admin/addCources", formData);
+      // let response = await axios.post("http://localhost:5000/Admin/addCources", formData);
+       let response = await axios.post(API_Admin_AddCourse, formData);
       console.log(response.data); 
       if(response.status=== 201){
         Swal.fire("success!", "Cource add Sucessfuly!", "success");

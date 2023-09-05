@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import Joi from "joi-browser";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {API_Admin_AddProduct} from "../../Configuration/Constant"
 const AddProduct = () => {
   const navigate = useNavigate()
   let [title, settitle] = useState("");
@@ -67,7 +68,8 @@ const AddProduct = () => {
     try {
       console.log("IN If Condointment")
       // send a POST request to the server to add the product
-      let response = await axios.post("http://localhost:5000/Admin/addProduct", formData);
+      // let response = await axios.post("http://localhost:5000/Admin/addProduct", formData);
+       let response = await axios.post(API_Admin_AddProduct, formData);
       // console.log(response.data); 
       // const response1 =response.json();
       if(response.status=== 201){

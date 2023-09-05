@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
 import Swal from "sweetalert2";
+import {API_Upload_Videos} from "../Configuration/Constant"
 const TopHeader = () => {
   const [userImage, setUserImage] = useState("");
   const [getMember, setMember] = useState([]);
@@ -54,7 +55,8 @@ const TopHeader = () => {
               </div>
               <div className='doctor'>
                 {/* <img src='/doctor-bigImage.png' width="43px" alt='' /> */}
-                <img src={`http://localhost:5000/uploads/${storedImg}`} className='rounded-circle' width="50px" height='50px' alt=''  />
+                {/* <img src={`http://localhost:5000/uploads/${storedImg}`} className='rounded-circle' width="50px" height='50px' alt=''  /> */}
+                <img src={`${API_Upload_Videos}${storedImg}`} className='rounded-circle' width="50px" height='50px' alt=''  />
               </div>
               <div className='doc_name'>
                 <p className='set_memberName'>{storedUserName}</p>
