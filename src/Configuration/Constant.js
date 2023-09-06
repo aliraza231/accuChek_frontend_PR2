@@ -3,7 +3,7 @@ export const API_Get_Courses = "http://128.199.221.11:5000/Admin/getCources";
 //Uploading videos
 export const API_Upload_Videos = `http://128.199.221.11:5000/uploads/`;
 // Geting Single Video
-export const Api_Get_Single_Video = "http://localhost:5000/Admin/getSingleCourse";
+export const Api_Get_Single_Video = 'http://128.199.221.11:5000/Admin/getSingleCourse/';
 //Getting Videos which is completed by User 
 export const API_Get_CompleteVideoStatus = 'http://128.199.221.11:5000/User/getTrueStausCources';
 //Getting all products
