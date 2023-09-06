@@ -1,45 +1,61 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 const Otp = () => {
-    const navigate = useNavigate();
-  const [otp, setOTP] = useState("");
+  const navigate = useNavigate();
+  const [otpInput, setOTPInput] = useState("");
+  const [verificationError, setVerificationError] = useState("");
+  const [isOTPVerified, setIsOTPVerified] = useState(false);
 
+  const handleOTPSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleVerifyOTP = async () => {
+    try {
+      // Send the entered OTP to the backend for verification
+      const response = await axios.post('/verify-otp', { otp: otpInput });
+
+      if (response.status === 200 && response.data.isVerified) {
+        setIsOTPVerified(true);
+        setVerificationError(""); // Clear any previous error messages
+      } else {
+        setVerificationError("Invalid OTP. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      setVerificationError("Failed to verify OTP. Please try again later.");
+    }
   };
-  return (
-    <>
-    <div className='container-fluid forgot_page'>
-    <div className='row'>
-       <div className='col-md-6 ms-0'>
-         <div className='company_name' id='set_marginAccuChek'>
-           <h3 className='brand_name'>ACCU-CHEK <span>®</span> </h3>
-         </div>
-       </div>
-       <div className='col-md-6 mt-5 d-flex justify-content-end'>
-         <img  src='/Group 20.svg' alt=''/>
-       </div>
-   </div>
-   <div className='row justify-content-center'>
-       <div className='col-md-6 forgoot_root'>
-       <h6 className='text-center forgoot_root_h6 '>ACCU-CHEK ACADEMY</h6>
-          <div >
-               <h6 className='text-center forgot_box '>Account Verified</h6>
-               <p className='text-center fotgot_instruction'>Please check your email address and verify your account 
-               <br></br></p>
-               <div className='row for_got_email_input'>
-                   <label for="exampleInputEmail1" className="d-flex  mb-1 sigin_Lables">Otp</label>
-                   <input className='p-2 form-control inputs_background sigin_Fields' type='text' placeholder='Input your otp here'/>
-               </div>
-               <div className='d-flex justify-content-center ' >
-               <button className=" sign_btn btn reset p-2 mt-3 text-white">Verify Account</button>
-               </div>
-          </div>
-       </div>
-   </div>
-    </div>
-    </>
-  )
-}
 
-export default Otp
+  return (
+    <div className='container-fluid forgot_page'>
+      {/* ... (your HTML structure) */}
+      <form onSubmit={handleOTPSubmit}>
+        <div className='row for_got_email_input'>
+          <label htmlFor="otpInput" className="d-flex  mb-1 sigin_Lables">OTP</label>
+          <input
+            id="otpInput"
+            onChange={(e) => setOTPInput(e.target.value)}
+            value={otpInput}
+            className='p-2 form-control inputs_background sigin_Fields'
+            type='text'
+            placeholder='Input your OTP here'
+          />
+        </div>
+        <div className='d-flex justify-content-center'>
+          <button className="sign_btn btn reset p-2 mt-3 text-white" type="submit">
+            Verify Account
+          </button>
+        </div>
+      </form>
+      {verificationError && (
+        <div className="text-center text-danger mt-3">{verificationError}</div>
+      )}
+      {isOTPVerified && (
+        <div className="text-center text-success mt-3">Account verified successfully.</div>
+      )}
+    </div>
+  );
+};
+
+export default Otp;

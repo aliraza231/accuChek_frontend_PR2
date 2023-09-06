@@ -3,7 +3,7 @@ import  { useState, useEffect } from 'react'
 import Loader from '../components/Loader';
 import ReactPlayer from 'react-player'
 import Swal from 'sweetalert2';
-import { API_Get_Courses,API_Upload_Videos } from '../Configuration/Constant';
+import { API_Get_Courses,API_Upload_Videos,myAllRounderApi } from '../Configuration/Constant';
 import { NavLink } from 'react-router-dom';
 const MemberCourses = () => {
 const [getFalseStaus_cources, setFalseStausCources] = useState([]);
@@ -148,7 +148,7 @@ const [getProducts, setProducts] = useState([]);
                 <ReactPlayer
                 
                 ref={playerRefs.current[index]}
-                url={`${API_Upload_Videos}${product.image}`}
+                url={`${myAllRounderApi}${product.image}`}
                 // url={`http://localhost:5000/uploads/${product.image}`}
                 controls={false}
                 // light={true}

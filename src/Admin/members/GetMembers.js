@@ -74,9 +74,7 @@ const GetMembers = () => {
               <div className="col-md-3">
                 <div className="member_card ms-2 text-center mb-5" style={{height:"300px"}}>
                 {/* <img className="card-img-top"  src={`http://localhost:5000/uploads/${member.image}`} width='100px' height='130px' alt="Card image cap" /> */}
-                <img className="card-img-top"  src={`${API_Upload_Videos}${member.image}`} width='100px' height='130px' alt="Card image cap" />
-                
-                
+                <img className="card-img-top"   src={`${API_Upload_Videos}${member.image}`} width='100px' height='130px' alt="Card image cap" />
                   <h6>{member.name}</h6>
                   <p>{member.email}</p>
                   <h6>{member.country}</h6>

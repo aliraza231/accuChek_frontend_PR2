@@ -107,7 +107,7 @@ const UpdateMember = () => {
     name: Joi.string().min(3).max(50).required(),
     email: Joi.string().email().min(10).max(100).required(),
     password: Joi.string().min(8).max(100).required(),
-    country: Joi.string().min(3).max(100).required(),
+    country: Joi.string().min(1).max(100).required(),
     langguage: Joi.string().min(3).max(100).required(),
     confirm_password: Joi.string().min(8).max(100).required(),
   };
@@ -223,6 +223,7 @@ const UpdateMember = () => {
                         Password
                       </label>
                       <input
+                         disabled 
                          // onChange={CHangeFunction}
                         onChange={(e) => setPassword(e.target.value)}
                         onBlur={handleSave}
@@ -245,6 +246,7 @@ const UpdateMember = () => {
                         Confirm Password
                       </label>
                       <input
+                        disabled 
                          // onChange={CHangeFunction}
                         onChange={(e) => setName(e.target.value)}
                         onBlur={handleSave}

@@ -91,7 +91,7 @@ const GetProducrs = () => {
               <div class="d-flex align-items-center">
                 <img
                   // src={`http://localhost:5000/uploads/${product.image}`}
-                  rc={`${API_Upload_Videos}${product.image}`}
+                  src={`${API_Upload_Videos}${product.image}`}
                   alt=""
                   style={{ width: "45px", height: "45px" }}
                   class="rounded-circle"
@@ -112,7 +112,8 @@ const GetProducrs = () => {
             </td>
             <td className="d-flex">
             {/* <NavLink to={`/Admin/Dashboard/UpdateProduct/${product._id}`}> */}
-            <NavLink to={`${API_UpdateProduct}${product._id}`}>
+            {/* <NavLink to={`${API_UpdateProduct}${product._id}`}> */}
+            <NavLink to={`/Admin/Dashboard/UpdateProduct/${product._id}`}>
               <button type="button" className="btn btn-warning btn-sm me-2">
               <i class="fa-solid fa-pen-to-square"></i>
               </button>
