@@ -42,8 +42,8 @@ const Signin = () => {
     console.log(email, password);
   
     try {
-      let result = await fetch("http://localhost:5000/User/userSigin", {
-        // let result = await fetch(API_User_SignIn, {
+      // let result = await fetch("http://localhost:5000/User/userSigin", {
+        let result = await fetch(API_User_SignIn, {
         method: "POST",
         body: JSON.stringify({
           email,
