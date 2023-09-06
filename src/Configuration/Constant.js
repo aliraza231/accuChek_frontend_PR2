@@ -39,5 +39,4 @@ export const API_Get_UnCompletedCourseVideo = 'http://128.199.221.11:5000/User/g
 
 
 // my Test Object
-export const mySiginApi = "http://localhost:5000/User/userSigin";
-export const myAPI_Upload_Videos = `http://localhost:5000/uploads/`;
+export const myAllRounderApi = `http://localhost:5000/uploads/`;

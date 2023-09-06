@@ -4,7 +4,7 @@ import Joi from "joi-browser";
 import {Link,NavLink, useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import Swal from "sweetalert2";
-import { API_User_SignIn} from '../Configuration/Constant';
+import { API_User_SignIn } from '../Configuration/Constant';
 const Signin = () => {
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState('password');
@@ -105,6 +105,7 @@ const Signin = () => {
   
         // Use the decoded token as needed
         const userImage = decodedToken.userImage;
+        const userPoints = decodedToken.userPoints;
         const userName = decodedToken.userName;
         // const userImage = decodedToken.userImage;
         const userId = decodedToken.userId;
@@ -113,12 +114,14 @@ const Signin = () => {
         // localStorage.setItem('userId', userId);
         localStorage.setItem('userId', userId);
         localStorage.setItem('userImage', userImage);
+        localStorage.setItem('userPoints', userPoints);
         // navigate('/user/MemberHome');
         navigate('/user/MemberHome', {
           state: {
             userName: decodedToken.userName,
             userId: decodedToken.userId,
-            userImage: decodedToken.userImage
+            userImage: decodedToken.userImage,
+            userPoints:decodedToken.userPoints
           }
         });
 
@@ -128,7 +131,7 @@ const Signin = () => {
   localStorage.setItem('userName', userName);
   localStorage.setItem('userId', userId);
   localStorage.setItem('userImage',userImage);
-
+  localStorage.setItem('userPoints', userPoints);
   
       }
     } catch (error) {

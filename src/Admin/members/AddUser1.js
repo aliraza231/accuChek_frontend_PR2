@@ -72,11 +72,11 @@ const SideBar = () => {
       let response = await axios.post(API_User_Rregistration, formData);
       console.log(response.data); 
       if(response.status=== 201){
-        Swal.fire("success!", "Cource add Sucessfuly!", "success");
+        Swal.fire("success!", "Member add Sucessfuly!", "success");
         setAddedSuccessfully(true);
         resetFormData();
       
-      navigate('/Admin/Dashboard/GetGetMembers')
+      navigate('/Admin/Dashboard/GetMembers')
       // window.alert("Successfull")
     }else{
       Swal.fire({

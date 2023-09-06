@@ -4,7 +4,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Joi from "joi-browser";
 import Swal from "sweetalert2";
-import {API_User_Rregistration} from "../Configuration/Constant"
+import {API_User_Rregistration,myAllRounderApi} from "../Configuration/Constant"
 const CreateAccount = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -14,6 +14,8 @@ const CreateAccount = () => {
   const [password, setPassword] = useState("");
   const [confirm_password, setconfrim_password] = useState("");
   let [image, setImage] = useState(null);
+  // const [points, setPoints] = useState(0);
+  
 
   // joi implementation
   const [errors, setErrors] = useState({});
@@ -24,6 +26,7 @@ const CreateAccount = () => {
     language: Joi.string().min(3).max(20).required(),
     password: Joi.string().min(3).max(20).required(),
     confirm_password: Joi.string().min(3).max(20).required(),
+    points: Joi.string().min(0).max(100).required
   };
 
   const validateProperty = (name, value) => {
@@ -74,8 +77,6 @@ const CreateAccount = () => {
       });
       return;
     }
-
-
     let formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
@@ -101,7 +102,16 @@ const CreateAccount = () => {
       
       navigate('/')
       // window.alert("Successfull")
-    }else if(response.status=== 500 ){
+    }
+    else if(response.status === 400 ){
+      Swal.fire({
+        position:"center",
+        icon: "Invalid Data",
+        title: "Oops...",
+        text: "Register Failed",
+      });
+    }
+    else if(response.status=== 500 ){
       Swal.fire({
         position:"center",
         icon: "Internal Server Error",
@@ -244,13 +254,6 @@ const CreateAccount = () => {
                         type="submit"
                         value="Submit" className='btn sign-btn_1 sign_btn  '>Sign up</button>
                        </div>
-
-                       {/* otp */}
-                       {/* <div className="mb-3">
-                        <label for="otp" className="d-flex ms-3 form-label">OTP</label>
-                        <input onChange={(e) => setOTP(e.target.value)} name="otp" type="text" className="form-control inputs_background" id="otp" placeholder='Enter OTP received in email'/>
-                      </div> */}
-                       {/*  */}
                        <div className='text-center mt-1'>
                          <p className='or'>Or</p>
                        </div>

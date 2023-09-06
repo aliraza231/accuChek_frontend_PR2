@@ -3,13 +3,16 @@ import  { useState, useEffect } from 'react'
 import Loader from '../components/Loader';
 import ReactPlayer from 'react-player'
 import Swal from 'sweetalert2';
-import {Api_Get_Single_Video,API_Get_UnCompletedCourseVideo,API_Upload_Videos} from "../Configuration/Constant"
+import {Api_Get_Single_Video,API_Get_UnCompletedCourseVideo,API_Upload_Videos,myAllRounderApi} from "../Configuration/Constant"
 import { useParams } from 'react-router-dom';
 const MemberVideo = () => {
   const [getSingleCourse, setSingleCourse] = useState([""]);
 const [getFalseStaus_cources, setFalseStausCources] = useState([]);
 const [isloading, setLoading] = useState(true);
 const [getProducts, setProducts] = useState([]);
+const [points,setPoints] = useState('');
+const storedPoints = localStorage.getItem('userPoints');
+const storedUserId = localStorage.getItem('userId');
 
 const params = useParams();
 
@@ -23,8 +26,8 @@ useEffect(() => {
 
 
 const getCourseData = async () => {
-  // let result = await fetch(`http://localhost:5000/Admin/getSingleCourse/${params.id}`);
-  let result = await fetch(`${Api_Get_Single_Video}${params.id}`);
+  let result = await fetch(`http://localhost:5000/Admin/getSingleCourse/${params.id}`);
+  // let result = await fetch(`${Api_Get_Single_Video}${params.id}`);
   result = await result.json();
   if(result<0){
         result.send("<h1>No Data!</h1>")
@@ -33,6 +36,45 @@ const getCourseData = async () => {
   setLoading(false);
   
 };
+
+const updatingData = async (VideoPoints) => {
+  try {
+    // Add VideoPoints to the points state
+    let num1 = parseInt(storedPoints, 10); // Convert storedPoints to an integer
+    console.log(num1);
+    
+    let num2 = parseFloat(VideoPoints); // Convert VideoPoints to a floating-point number
+    console.log(num2);
+    
+    let sumofPoints = num1 + num2; // Perform numeric addition
+    console.log(sumofPoints);
+
+    const result = await fetch(
+      `http://localhost:5000/User/userInfo/${storedUserId}`, // Use the user's ID here
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          points: sumofPoints, // Update points with VideoPoints
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (result.status === 200) {
+      console.log("User points updated successfully");
+      Swal.fire("Success", "successfully Claimed!", "success");
+    } else {
+      console.error("Failed to update user points");
+      Swal.fire("Error", "Failed to update points", "error");
+    }
+  } catch (error) {
+    console.error("Error while Claim", error);
+    Swal.fire("Error", "Failed to update points", "error");
+  }
+};
+
+
 const getFalseStausCources = async () => {
   let result = await fetch(API_Get_UnCompletedCourseVideo);
   result = await result.json();
@@ -72,7 +114,7 @@ const getFalseStausCources = async () => {
         return newDurations;
       });
     };
-    const handleEnded = (index,VideoPoints)=>{
+    const handleEnded = async (index, VideoPoints) => {
       Swal.fire({
         html: `
           <div class='container' style='; height:' id='for_swal_back'>
@@ -82,30 +124,42 @@ const getFalseStausCources = async () => {
                 <div>
                   <h6 class='text-center forgot_box'>You’ve received a Reward</h6>
                   <div>
-                  <img src='/Star 5.svg' height='200px' alt='' />
-                  <span> <img src='/FullStar.png' height='50pxpx' alt=''/> </span>
-                  <p>${VideoPoints}</p>
+                  <img src='/Star 5.svg' height='200px' alt='' 
                  <div >
-                 
+                 <div class='d-flex justify-content-center position-relative'style='top:-8pc'>
+                  <span> <img src='/FullStar.png' height='50pxpx' alt=''/> </span>
+                  <p class='align-self-end'>${VideoPoints}</p>
+                  </div>
                  
                  </div>
                   </div>
                   <div class='d-flex justify-content-center'>
-                  
-                    <button class='sign_btn btn reset p-2 mt-3 text-white'>CLAIM</button>
+                    <button class='sign_btn cliam_btn btn reset p-2 mt-3 text-white'>CLAIM</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         `,
+        didOpen: () => {
+          const claimButton = document.querySelector(".cliam_btn");
+          console.log("CLAIM button selected:", claimButton); // Debugging
+          claimButton.addEventListener("click", async () => {
+            console.log("CLAIM button clicked"); // Debugging
+            // Call the updatingData function to update user points
+            await updatingData(VideoPoints);
+    
+            // Close the Swal modal
+            Swal.close();
+          });
+        },
         showConfirmButton: false, // Hides the default "OK" button
         width: '40%',
         padding: '10px',
         background: 'rgba(255,255,255,0.9)',
       });
-    }
-  
+    };
+    
   return (
     <>
      {isloading?(
@@ -132,7 +186,7 @@ const getFalseStausCources = async () => {
                   <ReactPlayer 
                   id='full_page_player'
                   ref={playerRefs.current[index]}
-                  url={`${API_Upload_Videos}${product.image}`}
+                  url={`${myAllRounderApi}${product.image}`}
                   controls={true}
                   onProgress={({ playedSeconds }) => handleTime(index, playedSeconds)}
                   onDuration={(videoDuration) => handleDuration(index, videoDuration)}

@@ -8,6 +8,9 @@ const TopHeader = () => {
    const storedUserName = localStorage.getItem('userName');
    const storedUserId = localStorage.getItem('userId');
    const storedImg = localStorage.getItem('userImage');
+   const storedPoints = localStorage.getItem('userPoints');
+   const pointsDisplay = storedPoints === '0' ? '0' : storedPoints;
+
   const currentDate = new Date();
   const monthNames = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -30,10 +33,7 @@ const TopHeader = () => {
   }
   console.log(userImage);
 
- 
-  
   const formattedDate = `Today ${month} ${day}, ${year} | ${hours}:${minutes} ${amOrPm}`;
-
   return (
     <div className='container-fluid top_header py-4'  style={{width:"80%",marginLeft:"20%"}}>
       <div className='row align-items-center'>
@@ -68,7 +68,7 @@ const TopHeader = () => {
                 <img src='/star-3.svg' width="30px" alt='' />
               </div>
               <div className='total_ponits'>
-                <span> <p className='set_color_and_prop'>230</p></span>
+                <span> <p className='set_color_and_prop'>{pointsDisplay}</p></span>
               </div>
             </div>
           </div>
