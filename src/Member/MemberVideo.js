@@ -26,8 +26,8 @@ useEffect(() => {
 
 
 const getCourseData = async () => {
-  let result = await fetch(`http://localhost:5000/Admin/getSingleCourse/${params.id}`);
-  // let result = await fetch(`${Api_Get_Single_Video}${params.id}`);
+  // let result = await fetch(`http://localhost:5000/Admin/getSingleCourse/${params.id}`);
+  let result = await fetch(`${Api_Get_Single_Video}${params.id}`);
   result = await result.json();
   if(result<0){
         result.send("<h1>No Data!</h1>")
@@ -50,7 +50,7 @@ const updatingData = async (VideoPoints) => {
     console.log(sumofPoints);
 
     const result = await fetch(
-      `http://localhost:5000/User/userInfo/${storedUserId}`, // Use the user's ID here
+      `http://128.199.221.11:5000/User/userInfo/${storedUserId}`, // Use the user's ID here
       {
         method: "PUT",
         body: JSON.stringify({
@@ -186,7 +186,7 @@ const getFalseStausCources = async () => {
                   <ReactPlayer 
                   id='full_page_player'
                   ref={playerRefs.current[index]}
-                  url={`${myAllRounderApi}${product.image}`}
+                  url={`${API_Upload_Videos}${product.image}`}
                   controls={true}
                   onProgress={({ playedSeconds }) => handleTime(index, playedSeconds)}
                   onDuration={(videoDuration) => handleDuration(index, videoDuration)}
