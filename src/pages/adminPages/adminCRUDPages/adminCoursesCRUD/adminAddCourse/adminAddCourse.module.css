@@ -1,0 +1,21 @@
+#admin_user {
+    width: 78%;
+    position: relative;
+    margin-left: 20%;
+  }
+  #admin_user {
+    position: absolute;
+  }
+  #div_center {
+    display: flex;
+    margin: auto;
+    width: fit-content;
+  }
+  .inputs_background {
+    background-color: whitesmoke !important;
+  }
+  .inputs_background{
+    border: 1px solid #26becf !important ;
+    border-radius: 20px;
+  }
+  

@@ -1,0 +1,36 @@
+.forgoot_root{
+    width: 608px;
+    height: 554px;
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+.forgoot_root_h6{
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 20px;
+}
+.forgot_box{
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    padding: 20px;
+}
+.sign_btn {
+    width: 100%;
+    border-radius: 50px;
+    line-height: 2;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 700;
+  
+}
+.sign_btn:hover{
+    background: #8eb927;
+    color: white;
+}
+.reset{
+    width: 70%;
+    border-radius: 20px;
+    border: 1px solid #26becf;
+    background: #26becf;
+}   

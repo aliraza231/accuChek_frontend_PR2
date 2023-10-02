@@ -1,0 +1,49 @@
+.forgot_page{
+    background: linear-gradient(
+    10deg,
+    #8eb927 15%,
+    #82b939 17%,
+    #66ba67 23%,
+    #4fbc8c 28%,
+    #3dbca9 34%,
+    #30bdbe 39%,
+    #28bdca 45%,
+    #26becf 50%
+  );
+  height: 100vh;
+}
+.for_got_email_input{
+    width: 70%;
+    margin: auto;
+}
+.sigin_Lables{
+    font-size: 18px;
+    line-height: 29px;
+    letter-spacing: 0.005em;
+    color: #2A2A2A;
+}
+.inputs_background {
+    background-color: whitesmoke !important;
+}
+.sigin_Fields{
+    font-size: 18px;
+    color: #CBCBCB !important; 
+    padding: 25px;
+}
+.sign_btn {
+    width: 100%;
+    border-radius: 50px;
+    line-height: 2;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 700;
+  
+}
+.reset{
+    width: 70%;
+    border-radius: 20px;
+    border: 1px solid #26becf;
+    background: #26becf;
+} 
+    
+      
